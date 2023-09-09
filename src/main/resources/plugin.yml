@@ -3,3 +3,7 @@ version: '${project.version}'
 main: prod.spooky.kitduels.Kitduels
 api-version: '1.19'
 description: Allows to Duel with other players With various Kits
+commands:
+  Duel:
+    Description: "Allows You to duel with another player"
+    Usage: /<command> target
