@@ -1,0 +1,5 @@
+name: Kitduels
+version: '${project.version}'
+main: prod.spooky.kitduels.Kitduels
+api-version: '1.19'
+description: Allows to Duel with other players With various Kits
