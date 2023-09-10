@@ -1,32 +1,31 @@
 package prod.spooky.kitduels;
 
 import org.bukkit.Bukkit;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
 import org.bukkit.plugin.java.JavaPlugin;
 import prod.spooky.kitduels.commands.DuelCommand;
 import prod.spooky.kitduels.events.Oncompassmenu;
 import prod.spooky.kitduels.events.Onplayerjoin;
-import prod.spooky.kitduels.utils.Hubitems;
+
+import java.util.Objects;
 
 public final class Kitduels extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-//        System.out.println("Spooky Duels Plugin Successfully Loaded");
-        getServer().getPluginManager().registerEvents(new Onplayerjoin(), this);
-        getServer().getPluginManager().registerEvents(new Oncompassmenu(), this);
-        getCommand("Duel").setExecutor(new DuelCommand());
 
-        WorldCreator worldCreator = new WorldCreator("Arena");
-        World world = worldCreator.createWorld();
+
+
+
         Bukkit.unloadWorld("hub_nether", false);
         Bukkit.unloadWorld("hub_the_end", false);
     }
 
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
+    private void registerEvents(){
+        getServer().getPluginManager().registerEvents(new Onplayerjoin(), this);
+        getServer().getPluginManager().registerEvents(new Oncompassmenu(), this);
+    }
+
+    private void setCommands(){
+        Objects.requireNonNull(getCommand("Duel")).setExecutor(new DuelCommand());
     }
 }
