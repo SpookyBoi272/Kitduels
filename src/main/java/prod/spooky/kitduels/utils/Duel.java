@@ -22,5 +22,7 @@ public class Duel {
         DiamondKit kit = new DiamondKit();
         kit.addItems(player);
         kit.addItems(target);
+        player.setInvulnerable(false);
+        target.setInvulnerable(false);
     }
 }
