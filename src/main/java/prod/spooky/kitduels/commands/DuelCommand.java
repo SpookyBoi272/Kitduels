@@ -15,11 +15,16 @@ public class DuelCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
 
         if (commandSender instanceof Player p){
-            Player target = Bukkit.getPlayer(strings[0]);
-            if (target == null){
+            if (strings.length<1) {
                 p.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"Please Select a player to duel");
-            }else{
+
+                return true;
+            }
+            Player target = Bukkit.getPlayer(strings[0]);
+            if (!(target ==null)){
                 new Duel(p , target);
+            }else {
+               p.sendMessage("Player is currently offline.");
             }
         }else {
             System.out.println("This command must be executed by a player");
