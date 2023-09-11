@@ -35,7 +35,7 @@ public class OnCompassMenu implements Listener {
         swordMeta.setLore(List.of(new String[]{ChatColor.YELLOW+"Join Duels"}));
         swordMeta.setDisplayName(ChatColor.RED + "Duels");
         diamondSword.setItemMeta(swordMeta);
-
+        return diamondSword;
     }
 }
 

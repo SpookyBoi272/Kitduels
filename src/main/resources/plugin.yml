@@ -5,5 +5,10 @@ api-version: '1.19'
 description: Allows to Duel with other players With various Kits
 commands:
   Duel:
-    Description: "Allows You to duel with another player"
-    Usage: /<command> <player>
+    description: "Allows You to duel with another player"
+    usage: /<command> <player>
+  Hub:
+    description: "Teleports You to Server Hub"
+    usage: /<command>
+    aliases:
+      - hub
