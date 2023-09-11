@@ -23,7 +23,7 @@ public class DiamondKit {
 
     ItemStack[] diamondKit = {sword, axe, bow, arrow, apple, food, blocks, lava, water};
     public DiamondKit() {
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 5);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         bow.addEnchantment(Enchantment.ARROW_INFINITE, 1);
         bow.addEnchantment(Enchantment.ARROW_DAMAGE, 5);
     }
