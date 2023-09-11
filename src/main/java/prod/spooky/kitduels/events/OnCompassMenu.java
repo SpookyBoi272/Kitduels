@@ -10,15 +10,19 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
+import prod.spooky.kitduels.utils.Hubitems;
+
 import java.util.List;
 
 public class OnCompassMenu implements Listener {
     @EventHandler
     public void onCompassRightClick(PlayerInteractEvent event) {
         if (event.getItem() != null && event.getItem().getType() == Material.COMPASS) {
-            if (event.getAction().name().contains("RIGHT")) {
+            Hubitems hub = new Hubitems();
+            ItemMeta checkMeta = hub.getCompassmeta();
+            if (event.getAction().name().contains("RIGHT") /*&& event.getItem().getItemMeta() == checkMeta*/) {
                 openMainMenu(event.getPlayer());
             }
         }
@@ -30,7 +34,7 @@ public class OnCompassMenu implements Listener {
         ItemStack item = event.getCurrentItem();
 
         if (item != null && item.getType() == Material.DIAMOND_SWORD && item.hasItemMeta()
-                && item.getItemMeta().getDisplayName().equalsIgnoreCase("Duel")) {
+                /*&& item.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.YELLOW+"Duels")*/) {
             openPlayerListInventory(player);
         }
     }
@@ -54,7 +58,7 @@ public class OnCompassMenu implements Listener {
                 String playerName = ChatColor.stripColor(clickedItem.getItemMeta().getDisplayName());
 
                 // Execute the /duel command with the selected player's name
-                Bukkit.dispatchCommand(player, "/duel " + playerName);
+                Bukkit.dispatchCommand(player, "duel " + playerName);
             }
         }
     }
@@ -67,7 +71,8 @@ public class OnCompassMenu implements Listener {
             playerListInventory.addItem(playerHead);
         }
 
-        player.openInventory(playerListInventory);
+        Inventory fixedPlayerListInventory = removePlayerHead(playerListInventory, player.getName());
+        player.openInventory(fixedPlayerListInventory);
     }
 
     private ItemStack createPlayerHead(String playerName) {
@@ -92,6 +97,37 @@ public class OnCompassMenu implements Listener {
         swordMeta.setDisplayName(ChatColor.RED + "Duels");
         diamondSword.setItemMeta(swordMeta);
         return diamondSword;
+    }
+
+    public Inventory removePlayerHead(Inventory inventory, String headOwner) {
+
+
+        for (int slot = 0; slot < inventory.getSize(); slot++) {
+            ItemStack item = inventory.getItem(slot);
+
+            if (item != null && item.getType() == Material.PLAYER_HEAD) {
+                // Check if the item has the correct owner (player's name or UUID)
+                String itemOwner = getPlayerHeadOwner(item);
+
+                if (itemOwner != null && itemOwner.equalsIgnoreCase(headOwner)) {
+                    // Remove the player head from the inventory
+                    inventory.setItem(slot, new ItemStack(Material.AIR));
+                }
+            }
+        }
+        return inventory;
+    }
+
+    private String getPlayerHeadOwner(ItemStack playerHead) {
+        if (playerHead != null && playerHead.getType() == Material.PLAYER_HEAD) {
+            if (playerHead.hasItemMeta() && playerHead.getItemMeta() instanceof SkullMeta skullMeta) {
+
+                if (skullMeta.hasOwner()) {
+                    return skullMeta.getOwningPlayer().getName();
+                }
+            }
+        }
+        return null;
     }
 }
 

@@ -8,16 +8,20 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class Hubitems {
+    ItemStack hubItem = new ItemStack(Material.COMPASS);
+    ItemMeta compassMeta = hubItem.getItemMeta();
+    public Hubitems() {
+        compassMeta.setDisplayName(ChatColor.YELLOW + "Games");
+        compassMeta.addEnchant(Enchantment.KNOCKBACK, 6, true);
+        hubItem.setItemMeta(compassMeta);
+    }
 
     public void addItems (Player player){
-
-        ItemStack hubItem = new ItemStack(Material.COMPASS);
-        ItemMeta compassmeta = hubItem.getItemMeta();
-        compassmeta.setDisplayName(ChatColor.YELLOW+"Games");
-        compassmeta.addEnchant(Enchantment.KNOCKBACK, 6, true);
-        hubItem.setItemMeta(compassmeta);
         player.getInventory().setItem(4,hubItem);
     }
 
+    public ItemMeta getCompassmeta(){
+        return compassMeta;
+    }
 
 }

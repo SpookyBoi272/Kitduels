@@ -21,7 +21,7 @@ public class DiamondKit {
     ItemStack water = new ItemStack(Material.WATER_BUCKET);
     ItemStack lava = new ItemStack(Material.LAVA_BUCKET);
 
-    ItemStack[] diamondKit = {sword, axe, bow, arrow, apple, food, blocks, lava, water};
+    ItemStack[] diamondKit = {sword, axe, bow, arrow, apple, food, blocks};
     public DiamondKit() {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         bow.addEnchantment(Enchantment.ARROW_INFINITE, 1);

@@ -14,7 +14,7 @@ import prod.spooky.kitduels.utils.Hubitems;
 
 import java.util.Objects;
 
-public class onPlayerJoin implements Listener {
+public class OnPlayerJoin implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event){
         Player p = event.getPlayer();
@@ -25,6 +25,7 @@ public class onPlayerJoin implements Listener {
     public void onBlockPlace(BlockPlaceEvent event){
         event.setCancelled(true);
     }
+    @EventHandler
     public void onBlockBreak(BlockBreakEvent event){event.setCancelled(true);}
 
     public void setup(Player p){

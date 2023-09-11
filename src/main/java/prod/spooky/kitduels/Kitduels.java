@@ -5,9 +5,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import prod.spooky.kitduels.commands.DuelCommand;
 import prod.spooky.kitduels.commands.HubCommand;
 import prod.spooky.kitduels.events.OnCompassMenu;
-import prod.spooky.kitduels.events.onPlayerJoin;
-
-import java.util.Objects;
+import prod.spooky.kitduels.events.OnDuelEnd;
+import prod.spooky.kitduels.events.OnPlayerJoin;
 
 public final class Kitduels extends JavaPlugin {
 
@@ -20,8 +19,9 @@ public final class Kitduels extends JavaPlugin {
     }
 
     private void registerEvents(){
-        getServer().getPluginManager().registerEvents(new onPlayerJoin(), this);
+        getServer().getPluginManager().registerEvents(new OnPlayerJoin(), this);
         getServer().getPluginManager().registerEvents(new OnCompassMenu(), this);
+        getServer().getPluginManager().registerEvents(new OnDuelEnd(), this);
     }
 
     private void setCommands(){

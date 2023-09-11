@@ -2,21 +2,23 @@ package prod.spooky.kitduels.utils;
 
 import org.bukkit.*;
 import org.bukkit.entity.Player;
+import prod.spooky.kitduels.events.OnDuelEnd;
 import prod.spooky.kitduels.kits.DiamondKit;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
-import java.util.UUID;
 
 
 public class Duel {
+
+
 
     public Duel(Player player, Player target){
         loadArena();
         sendDuelMsg(player,target);
         tpPlayers(player,target);
+        addToList(player, target);
         loadKit(player, target);
+        addToList(player,target);
     }
 
     private void loadArena(){
@@ -44,5 +46,9 @@ public class Duel {
         target.setInvulnerable(false);
     }
 
+    public void addToList(Player player, Player target){
+        OnDuelEnd playersInDuel = new OnDuelEnd();
+        playersInDuel.add(player,target);
+    }
 
 }
