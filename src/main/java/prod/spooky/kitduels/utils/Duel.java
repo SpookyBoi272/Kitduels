@@ -11,10 +11,8 @@ import java.util.UUID;
 
 
 public class Duel {
-    private Map<UUID,Integer> playerDataMap;
 
     public Duel(Player player, Player target){
-        playerDataMap = new HashMap<>();
         loadArena();
         sendDuelMsg(player,target);
         tpPlayers(player,target);
