@@ -7,18 +7,25 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import prod.spooky.kitduels.kits.DiamondKit;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 
 public class Duel implements Listener {
-    OnDuelEnd playersInDuel = new OnDuelEnd();
+    public List<UUID> playersInDuel = new ArrayList<>();
 
     @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent event){
+    public void onDuelEnd(PlayerDeathEvent event){
         if ((event.getPlayer().getKiller()!= null)){
-            if (playersInDuel.checkInDuel(event.getPlayer())){
-                playersInDuel.removePlayers(event.getPlayer(),event.getPlayer().getKiller());
+            System.out.println(playersInDuel.contains(event.getPlayer().getUniqueId()));
+            if (playersInDuel.contains(event.getPlayer().getUniqueId())){
+                removePlayers(event.getPlayer(),event.getPlayer().getKiller());
                 Bukkit.dispatchCommand(event.getPlayer().getKiller(),"hub");
+                Bukkit.unloadWorld("Arena",true);
+                WorldCreator worldCreator = new WorldCreator("Arena");
+                worldCreator.createWorld();
             }
         }
     }
@@ -27,7 +34,6 @@ public class Duel implements Listener {
         loadArena();
         sendDuelMsg(player,target);
         tpPlayers(player,target);
-        addToList(player, target);
         loadKit(player, target);
         addToList(player,target);
     }
@@ -60,7 +66,12 @@ public class Duel implements Listener {
     }
 
     public void addToList(Player player, Player target){
-        playersInDuel.add(player,target);
+        playersInDuel.add(player.getUniqueId());
+        playersInDuel.add(target.getUniqueId());
     }
 
+    public void removePlayers(Player player, Player target){
+        playersInDuel.remove(player.getUniqueId());
+        playersInDuel.remove(target.getUniqueId());
+    }
 }
