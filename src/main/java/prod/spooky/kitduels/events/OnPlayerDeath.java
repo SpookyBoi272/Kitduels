@@ -7,13 +7,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import prod.spooky.kitduels.utils.Hubitems;
 
-public class Onplayerdeath implements Listener {
+import java.util.Objects;
+
+public class OnPlayerDeath implements Listener {
     @EventHandler
-    public void onplayerdeath(PlayerDeathEvent event ){
+    public void onpPlayerDeath(PlayerDeathEvent event ){
         Player p = event.getPlayer();
         Hubitems item = new Hubitems();
         item.addItems(p);
-        p.teleport(Bukkit.getWorld("hub").getSpawnLocation());
+        p.teleport(Objects.requireNonNull(Bukkit.getWorld("hub")).getSpawnLocation());
     }
 
 }
