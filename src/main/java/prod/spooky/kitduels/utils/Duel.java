@@ -2,17 +2,29 @@ package prod.spooky.kitduels.utils;
 
 import org.bukkit.*;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import prod.spooky.kitduels.events.OnDuelEnd;
 import prod.spooky.kitduels.kits.DiamondKit;
 
 import java.util.Objects;
 
 
-public class Duel {
+public class Duel implements Listener {
+    OnDuelEnd playersInDuel = new OnDuelEnd();
 
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event){
+        if ((event.getPlayer().getKiller()!= null)){
+            if (playersInDuel.checkInDuel(event.getPlayer())){
+                playersInDuel.removePlayers(event.getPlayer(),event.getPlayer().getKiller());
+                Bukkit.dispatchCommand(event.getPlayer().getKiller(),"hub");
+            }
+        }
+    }
 
-
-    public Duel(Player player, Player target){
+    public void  startDuel(Player player, Player target){
         loadArena();
         sendDuelMsg(player,target);
         tpPlayers(player,target);
@@ -20,6 +32,8 @@ public class Duel {
         loadKit(player, target);
         addToList(player,target);
     }
+
+
 
     private void loadArena(){
         WorldCreator worldCreator = new WorldCreator("Arena");
@@ -47,7 +61,6 @@ public class Duel {
     }
 
     public void addToList(Player player, Player target){
-        OnDuelEnd playersInDuel = new OnDuelEnd();
         playersInDuel.add(player,target);
     }
 

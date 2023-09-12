@@ -22,7 +22,8 @@ public class DuelCommand implements CommandExecutor {
             }
             Player target = Bukkit.getPlayer(strings[0]);
             if (!(target ==null)){
-                new Duel(p , target);
+                Duel duel = new Duel();
+                duel.startDuel(p,target);
             }else {
                p.sendMessage("Player is currently offline.");
             }

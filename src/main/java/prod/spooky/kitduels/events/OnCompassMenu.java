@@ -31,9 +31,8 @@ public class OnCompassMenu implements Listener {
     @EventHandler
     public void onPlayerInteract(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        ItemStack item = event.getCurrentItem();
 
-        if (item != null && item.getType() == Material.DIAMOND_SWORD && item.hasItemMeta()
+        if (event.getCurrentItem() != null && event.getCurrentItem().getType() == Material.DIAMOND_SWORD && event.getCurrentItem().hasItemMeta()
                 /*&& item.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.YELLOW+"Duels")*/) {
             openPlayerListInventory(player);
         }
@@ -41,7 +40,7 @@ public class OnCompassMenu implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (!(event.getWhoClicked() instanceof Player)) {
+        if (!(event.getWhoClicked() instanceof Player) && event.getCurrentItem() == null) {
             return;
         }
 
@@ -49,7 +48,7 @@ public class OnCompassMenu implements Listener {
         Inventory clickedInventory = event.getClickedInventory();
         String invName = clickedInventory. getViewers(). get(0). getOpenInventory(). getTitle();
 
-        if (clickedInventory != null && invName.equals("Online Players")) {
+        if (invName.equals("Online Players")) {
             event.setCancelled(true);
 
             ItemStack clickedItem = event.getCurrentItem();
@@ -107,7 +106,7 @@ public class OnCompassMenu implements Listener {
 
             if (item != null && item.getType() == Material.PLAYER_HEAD) {
                 // Check if the item has the correct owner (player's name or UUID)
-                String itemOwner = getPlayerHeadOwner(item);
+                String itemOwner = item.getItemMeta().getDisplayName();
 
                 if (itemOwner != null && itemOwner.equalsIgnoreCase(headOwner)) {
                     // Remove the player head from the inventory
