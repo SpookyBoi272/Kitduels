@@ -1,4 +1,4 @@
-package prod.spooky.kitduels.events;
+package prod.spooky.kitduels.utils;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;

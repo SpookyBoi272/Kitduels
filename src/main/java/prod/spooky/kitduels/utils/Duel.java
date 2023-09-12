@@ -5,7 +5,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import prod.spooky.kitduels.events.OnDuelEnd;
 import prod.spooky.kitduels.kits.DiamondKit;
 
 import java.util.Objects;
