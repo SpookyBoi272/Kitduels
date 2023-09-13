@@ -38,7 +38,6 @@ public class DuelCommand implements CommandExecutor, Listener {
         }else {
             System.out.println("This command must be executed by a player");
         }
-
         return true;
     }
 
