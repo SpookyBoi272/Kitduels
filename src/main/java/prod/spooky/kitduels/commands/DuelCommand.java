@@ -23,11 +23,16 @@ public class DuelCommand implements CommandExecutor, Listener {
 
         if (commandSender instanceof Player p){
             if (strings.length<1) {
-                p.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"Please Select a player to duel");
+                p.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"Please Select a player to duel.");
+                return true;
+            }
+            if (Bukkit.getPlayer(strings[0]) == null){
+                p.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"Player is already in a Duel.");
                 return true;
             }
             Player target = Bukkit.getPlayer(strings[0]);
-            if (!(target ==null) && Duel.playersInDuel.contains(target.getUniqueId())){
+            assert target != null;
+            if (Duel.playersInDuel.contains(target.getUniqueId())){
                 Duel.playersInDuel.add(p.getUniqueId());
                 Duel.playersInDuel.add(target.getUniqueId());
                 duel.startDuel(p,target);
