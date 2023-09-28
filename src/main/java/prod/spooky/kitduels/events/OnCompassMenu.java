@@ -11,7 +11,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
 import prod.spooky.kitduels.utils.Hubitems;
 
 import java.util.List;
@@ -40,13 +39,12 @@ public class OnCompassMenu implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (!(event.getWhoClicked() instanceof Player) && event.getCurrentItem() == null) {
+        if (!(event.getWhoClicked() instanceof Player) && event.getCurrentItem() == null && event.getClickedInventory()== null) {
             return;
         }
 
         Player player = (Player) event.getWhoClicked();
-        Inventory clickedInventory = event.getClickedInventory();
-        String invName = clickedInventory. getViewers(). get(0). getOpenInventory(). getTitle();
+        String invName = event.getView().getTitle();
 
         if (invName.equals("Online Players")) {
             event.setCancelled(true);
@@ -100,7 +98,6 @@ public class OnCompassMenu implements Listener {
 
     public Inventory removePlayerHead(Inventory inventory, String headOwner) {
 
-
         for (int slot = 0; slot < inventory.getSize(); slot++) {
             ItemStack item = inventory.getItem(slot);
 
@@ -117,16 +114,16 @@ public class OnCompassMenu implements Listener {
         return inventory;
     }
 
-    private String getPlayerHeadOwner(ItemStack playerHead) {
-        if (playerHead != null && playerHead.getType() == Material.PLAYER_HEAD) {
-            if (playerHead.hasItemMeta() && playerHead.getItemMeta() instanceof SkullMeta skullMeta) {
-
-                if (skullMeta.hasOwner()) {
-                    return skullMeta.getOwningPlayer().getName();
-                }
-            }
-        }
-        return null;
-    }
+//    private String getPlayerHeadOwner(ItemStack playerHead) {
+//        if (playerHead != null && playerHead.getType() == Material.PLAYER_HEAD) {
+//            if (playerHead.hasItemMeta() && playerHead.getItemMeta() instanceof SkullMeta skullMeta) {
+//
+//                if (skullMeta.hasOwner()) {
+//                    return skullMeta.getOwningPlayer().getName();
+//                }
+//            }
+//        }
+//        return null;
+//    }
 }
 

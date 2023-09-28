@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class OnPlayerDeath implements Listener {
     @EventHandler
-    public void onpPlayerDeath(PlayerRespawnEvent event ){
+    public void onpPlayerRes(PlayerRespawnEvent event ){
         Player p = event.getPlayer();
         Hubitems item = new Hubitems();
         item.addItems(p);

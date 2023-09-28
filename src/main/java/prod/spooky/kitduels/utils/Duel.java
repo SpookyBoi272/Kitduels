@@ -14,15 +14,9 @@ public class Duel implements Listener {
     public static List<UUID> playersInDuel = new ArrayList<>();
 
     public void startDuel(Player player, Player target) {
-        loadArena();
         sendDuelMsg(player, target);
         tpPlayers(player, target);
         loadKit(player, target);
-    }
-
-    private void loadArena() {
-        WorldCreator worldCreator = new WorldCreator("Arena");
-        worldCreator.createWorld();
     }
 
     private void sendDuelMsg(Player player, Player target) {
@@ -44,4 +38,6 @@ public class Duel implements Listener {
         player.setInvulnerable(false);
         target.setInvulnerable(false);
     }
+
+
 }

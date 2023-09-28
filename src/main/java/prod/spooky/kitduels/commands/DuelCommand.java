@@ -26,19 +26,20 @@ public class DuelCommand implements CommandExecutor, Listener {
                 p.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"Please Select a player to duel.");
                 return true;
             }
-            if (Bukkit.getPlayer(strings[0]) == null){
+            if (Bukkit.getPlayer(strings[0])==null){
+                p.sendMessage("Player is currently offline.");
+                return true;
+            }
+            if (Duel.playersInDuel.contains(Bukkit.getPlayer(strings[0]).getUniqueId())){
                 p.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"Player is already in a Duel.");
                 return true;
             }
             Player target = Bukkit.getPlayer(strings[0]);
-            assert target != null;
-            if (Duel.playersInDuel.contains(target.getUniqueId())){
+            if (!(Duel.playersInDuel.contains(target.getUniqueId()))){
                 Duel.playersInDuel.add(p.getUniqueId());
                 Duel.playersInDuel.add(target.getUniqueId());
                 duel.startDuel(p,target);
 
-            }else {
-               p.sendMessage("Player is currently offline.");
             }
         }else {
             System.out.println("This command must be executed by a player");
@@ -50,14 +51,20 @@ public class DuelCommand implements CommandExecutor, Listener {
     public void onDuelEnd(PlayerDeathEvent event){
         if ((event.getPlayer().getKiller()!= null)){
             if (Duel.playersInDuel.contains(event.getPlayer().getUniqueId())){
+                sendWinnerInfo(event.getPlayer(),event.getPlayer().getKiller(),event.getPlayer().getKiller().getHealth());
                 Duel.playersInDuel.remove(event.getPlayer().getUniqueId());
                 Duel.playersInDuel.remove(event.getPlayer().getKiller().getUniqueId());
                 Bukkit.dispatchCommand(event.getPlayer().getKiller(),"hub");
-                Bukkit.unloadWorld("Arena",true);
-                WorldCreator worldCreator = new WorldCreator("Arena");
-                worldCreator.createWorld();
+                Bukkit.unloadWorld("Arena",false);
+                WorldCreator arenaLoader = new WorldCreator("Arena");
+                arenaLoader.createWorld();
             }
         }
     }
 
+    private void sendWinnerInfo(Player killed , Player killer, double health){
+        int hearts = (int) health/2;
+        killed.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You were defeated by "+killer.getName()+" with "+ChatColor.RED+hearts+"❤");
+        killer.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You won Duel against "+killed.getName()+" with "+ChatColor.RED+hearts+"❤");
+    }
 }
