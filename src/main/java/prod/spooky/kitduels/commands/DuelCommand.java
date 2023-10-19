@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.jetbrains.annotations.NotNull;
 import prod.spooky.kitduels.utils.Duel;
 
@@ -54,6 +55,8 @@ public class DuelCommand implements CommandExecutor, Listener {
                 sendWinnerInfo(event.getPlayer(),event.getPlayer().getKiller(),event.getPlayer().getKiller().getHealth());
                 Duel.playersInDuel.remove(event.getPlayer().getUniqueId());
                 Duel.playersInDuel.remove(event.getPlayer().getKiller().getUniqueId());
+                Duel.removePlayer(event.getPlayer());
+                Duel.removePlayer(event.getPlayer().getKiller());
                 Bukkit.dispatchCommand(event.getPlayer().getKiller(),"hub");
                 Bukkit.unloadWorld("Arena",false);
                 WorldCreator arenaLoader = new WorldCreator("Arena");
@@ -66,5 +69,15 @@ public class DuelCommand implements CommandExecutor, Listener {
         int hearts = (int) health/2;
         killed.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You were defeated by "+killer.getName()+" with "+ChatColor.RED+hearts+"❤");
         killer.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You won Duel against "+killed.getName()+" with "+ChatColor.RED+hearts+"❤");
+    }
+
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent event){
+        Player p = event.getPlayer();
+        long currentTime = System.currentTimeMillis();
+        long playerTime = Duel.getPlayerTime(p);
+        if (playerTime != 0 && (currentTime-playerTime<5000L) ){
+            event.setCancelled(true);
+        }
     }
 }
