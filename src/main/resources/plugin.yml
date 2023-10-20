@@ -12,3 +12,9 @@ commands:
     usage: /<command>
     aliases:
       - hub
+  Accept:
+    description: "Accept incoming duel requests"
+    usage: /<command> <player>
+  Decline:
+    description: "Decline incoming duel requests"
+    usage: /<command> <player>

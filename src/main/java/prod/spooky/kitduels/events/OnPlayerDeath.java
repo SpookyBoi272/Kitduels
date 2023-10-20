@@ -16,6 +16,7 @@ public class OnPlayerDeath implements Listener {
         Hubitems item = new Hubitems();
         item.addItems(p);
         p.teleport(Objects.requireNonNull(Bukkit.getWorld("hub")).getSpawnLocation());
+        p.setInvulnerable(true);
     }
 
 }

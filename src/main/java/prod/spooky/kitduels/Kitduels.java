@@ -3,6 +3,8 @@ package prod.spooky.kitduels;
 import org.bukkit.Bukkit;
 import org.bukkit.WorldCreator;
 import org.bukkit.plugin.java.JavaPlugin;
+import prod.spooky.kitduels.commands.AcceptCommand;
+import prod.spooky.kitduels.commands.DeclineCommand;
 import prod.spooky.kitduels.commands.DuelCommand;
 import prod.spooky.kitduels.commands.HubCommand;
 import prod.spooky.kitduels.events.OnCompassMenu;
@@ -32,5 +34,7 @@ public final class Kitduels extends JavaPlugin {
     private void setCommands(){
         getCommand("Duel").setExecutor(new DuelCommand());
         getCommand("Hub").setExecutor(new HubCommand());
+        getCommand("accept").setExecutor(new AcceptCommand());
+        getCommand("decline").setExecutor(new DeclineCommand());
     }
 }
