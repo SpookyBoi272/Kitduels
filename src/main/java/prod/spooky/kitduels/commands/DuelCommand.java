@@ -13,11 +13,15 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.jetbrains.annotations.NotNull;
 import prod.spooky.kitduels.utils.Duel;
+import prod.spooky.kitduels.utils.DuelRequest;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 
 public class DuelCommand implements CommandExecutor, Listener {
-
-    Duel duel = new Duel();
+    public static Map<UUID, DuelRequest> pendingRequests = new HashMap<>();
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
@@ -39,14 +43,27 @@ public class DuelCommand implements CommandExecutor, Listener {
             if (!(Duel.playersInDuel.contains(target.getUniqueId()))){
                 Duel.playersInDuel.add(p.getUniqueId());
                 Duel.playersInDuel.add(target.getUniqueId());
-                duel.startDuel(p,target);
 
+//                duel.startDuel(p,target);
+                sendDuelRequest(p,target);
             }
         }else {
             System.out.println("This command must be executed by a player");
         }
         return true;
     }
+
+    public void sendDuelRequest(Player sender, Player receiver) {
+        UUID senderUUID = sender.getUniqueId();
+        UUID receiverUUID = receiver.getUniqueId();
+
+        DuelRequest request = new DuelRequest(senderUUID, receiverUUID);
+        DuelCommand.pendingRequests.put(receiverUUID, request);
+
+        // Send a message to the receiver indicating the duel request
+        receiver.sendMessage(sender.getName() + " has challenged you to a duel. Type /accept or /decline to respond.");
+    }
+
 
     @EventHandler
     public void onDuelEnd(PlayerDeathEvent event){

@@ -12,14 +12,7 @@ public class Duel implements Listener {
     public static List<UUID> playersInDuel = new ArrayList<>();
     public static Map<UUID, Long> playerTimeMap = new HashMap<>();
     Kitduels plugin = JavaPlugin.getPlugin(Kitduels.class);
-//    BukkitRunnable countDown = new BukkitRunnable() {
-//        @Override
-//        public void run() {
-//            long currentTime = System.currentTimeMillis();
-//            long playerTime = Duel.getPlayerTime(p);
-//            if
-//        }
-//    };
+
 
     // Method to add a player to the map with the current time
     public static void addPlayer(UUID playerUUID) {
@@ -45,7 +38,7 @@ public class Duel implements Listener {
         loadKit(player, target);
         addPlayer(target.getUniqueId());
         addPlayer(player.getUniqueId());
-//        startCountDown(player, target);
+        startCountDown(player, target);
     }
 
     private void sendDuelMsg(Player player, Player target) {
@@ -56,7 +49,7 @@ public class Duel implements Listener {
     private void tpPlayers(Player player, Player target) {
         World arena = Objects.requireNonNull(Bukkit.getWorld("Arena"));
         player.teleport(arena.getSpawnLocation());
-        Location targetLocation = new Location(arena, 0, 69, -36);
+        Location targetLocation = new Location(arena, 0, 68, -36);
         target.teleport(targetLocation);
     }
 
@@ -68,9 +61,27 @@ public class Duel implements Listener {
         target.setInvulnerable(false);
     }
 
-//    private void startCountDown(Player player, Player target){
-//
-//        countDown.runTaskTimer(plugin, 0, 20);
-//
-//    }
+    private void startCountDown(Player player, Player target){
+        BukkitRunnable countDown = new BukkitRunnable() {
+            @Override
+            public void run() {
+                long currentTime = System.currentTimeMillis();
+                long playerTime = Duel.getPlayerTime(player);
+                long diff = currentTime - playerTime;
+                int remTime = 5 - (((int)(diff)) / 1000);
+                System.out.println("Diff:"+diff);
+                System.out.println(remTime);
+                System.out.println(playerTimeMap.size());
+                if (remTime<1){
+                    this.cancel();
+                }
+                player.sendTitle(ChatColor.AQUA + "Kit Duels", ChatColor.WHITE + "Duel is starting in "+remTime+" Seconds", 1, 20, 1);
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 1.0f);
+                target.sendTitle(ChatColor.AQUA + "Kit Duels", ChatColor.WHITE + "Duel is starting in "+remTime+" Seconds", 1, 20, 1);
+                target.playSound(target.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 1.0f);
+            }
+        };
+        countDown.runTaskTimer(plugin, 0, 20);
+
+    }
 }
