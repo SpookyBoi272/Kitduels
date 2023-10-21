@@ -39,6 +39,9 @@ public class DeclineCommand implements CommandExecutor {
         if (request != null) {
             // Handle declining the duel request
             player.sendMessage("You have declined the duel request from " + Bukkit.getOfflinePlayer(request.getSender()).getName());
+        }else {
+            // No pending request from the player
+            player.sendMessage("You don't have any pending duel requests to reject.");
         }
     }
 
