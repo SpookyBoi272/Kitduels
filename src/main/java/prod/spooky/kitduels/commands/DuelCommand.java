@@ -60,7 +60,7 @@ public class DuelCommand implements CommandExecutor, Listener {
         DuelCommand.pendingRequests.put(receiverUUID, request);
 
         // Send a message to the receiver indicating the duel request
-        receiver.sendMessage(sender.getName() + " has challenged you to a duel. Type /accept or /decline to respond.");
+        receiver.sendMessage(sender.getName() + " has challenged you to a duel. Type "+ChatColor.GREEN+"/accept or "+ChatColor.RED+"/decline to respond.");
         sender.sendMessage("Sent Duel request to "+receiver.getName());
     }
 
