@@ -7,7 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.*;
 
-public class NetheritePotKit {
+public class BuffKit {
     ItemStack armor1 = new ItemStack(Material.NETHERITE_HELMET);
     ItemStack armor2 = new ItemStack(Material.NETHERITE_CHESTPLATE);
     ItemStack armor3 = new ItemStack(Material.NETHERITE_LEGGINGS);
@@ -20,7 +20,7 @@ public class NetheritePotKit {
     ItemStack apple = new ItemStack(Material.GOLDEN_APPLE, 64);
     ItemStack enchantBottle = new ItemStack(Material.EXPERIENCE_BOTTLE);
 
-    public NetheritePotKit() {
+    public BuffKit() {
         setPotionType(instantHealth, PotionEffectType.HEAL,100, 2 ,true );
         setPotionType(speedPot, PotionEffectType.SPEED, 1800, 2, true);
         setPotionType(strengthPot, PotionEffectType.INCREASE_DAMAGE, 1800 , 2, true);
@@ -57,8 +57,8 @@ public class NetheritePotKit {
 
     public void enchantArmour(ItemStack armour){
         armour.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL,4);
-        armour.addEnchantment(Enchantment.DURABILITY,4);
-        armour.addEnchantment(Enchantment.MENDING,4);
+        armour.addEnchantment(Enchantment.DURABILITY,3);
+        armour.addEnchantment(Enchantment.MENDING,1);
     }
 
     public void addPots(Player p){

@@ -10,10 +10,12 @@ public class DuelRequest {
     private String kit;
     private String map;
 
-    public DuelRequest(UUID sender, UUID receiver) {
+    public DuelRequest(UUID sender, UUID receiver, String kit, String map) {
         this.sender = sender;
         this.receiver = receiver;
         this.requestTime = System.currentTimeMillis();
+        this.kit= kit;
+        this.map= map;
     }
 
     public String getKit() {

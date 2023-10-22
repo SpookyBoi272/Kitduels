@@ -6,7 +6,7 @@ description: Allows to Duel with other players With various Kits
 commands:
   Duel:
     description: "Allows You to duel with another player"
-    usage: /<command> <player>
+    usage: /<command> <player> <kit> <map>
   Hub:
     description: "Teleports You to Server Hub"
     usage: /<command>

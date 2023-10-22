@@ -21,6 +21,14 @@ public final class Kitduels extends JavaPlugin {
         Bukkit.unloadWorld("hub_the_end", false);
         WorldCreator arenaLoader = new WorldCreator("Arena");
         arenaLoader.createWorld();
+        WorldCreator arenaLoader2 = new WorldCreator("Museum");
+        arenaLoader2.createWorld();
+        WorldCreator arenaLoader3 = new WorldCreator("SkyPort");
+        arenaLoader3.createWorld();
+        WorldCreator arenaLoader4 = new WorldCreator("Highset");
+        arenaLoader4.createWorld();
+        WorldCreator arenaLoader5 = new WorldCreator("Fractal");
+        arenaLoader5.createWorld();
     }
 
     private void registerEvents(){
