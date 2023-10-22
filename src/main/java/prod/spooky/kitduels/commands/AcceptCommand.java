@@ -47,7 +47,7 @@ public class AcceptCommand implements CommandExecutor {
                 // Handle accepting the duel request (start the duel)
                 Duel duel = new Duel();
                 duel.startDuel(acceptingplayer,Bukkit.getPlayer(request.getSender()));
-                acceptingplayer.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You have accepted the duel request from " + Bukkit.getOfflinePlayer(senderUUID).getName());
+                acceptingplayer.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.GREEN+"You have accepted the duel request from " + Bukkit.getOfflinePlayer(senderUUID).getName());
             }
         } else {
             // No pending request from the player
