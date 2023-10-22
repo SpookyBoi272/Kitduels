@@ -45,8 +45,8 @@ public class Duel implements Listener {
     }
 
     private void sendDuelMsg(Player player, Player target) {
-        player.sendMessage(ChatColor.RED + "[KitDuels] " + ChatColor.WHITE + "You have started a duel with " + target.getName());
-        target.sendMessage(ChatColor.RED + "[KitDuels] " + ChatColor.WHITE + "You have started a duel with " + player.getName());
+        player.sendMessage(ChatColor.RED + "[KitDuels] " + ChatColor.AQUA + "You have started a duel with " + target.getName());
+        target.sendMessage(ChatColor.RED + "[KitDuels] " + ChatColor.AQUA + "You have started a duel with " + player.getName());
     }
 
     private void setupPlayers(Player player, Player target, String map) {
