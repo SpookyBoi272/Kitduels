@@ -32,7 +32,7 @@ public class DuelCommand implements CommandExecutor, Listener {
                 return true;
             }
             if (Bukkit.getPlayer(strings[0])==null){
-                p.sendMessage("Player is currently offline.");
+                p.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"Player is currently offline.");
                 return true;
             }
             if (Duel.playersInDuel.contains(Bukkit.getPlayer(strings[0]).getUniqueId())){
@@ -43,9 +43,7 @@ public class DuelCommand implements CommandExecutor, Listener {
             if (!(Duel.playersInDuel.contains(target.getUniqueId()))){
                 Duel.playersInDuel.add(p.getUniqueId());
                 Duel.playersInDuel.add(target.getUniqueId());
-                if (strings.length == 1){
 
-                }
                 sendDuelRequest(p,target);
             }
         }else {
@@ -62,8 +60,8 @@ public class DuelCommand implements CommandExecutor, Listener {
         DuelCommand.pendingRequests.put(receiverUUID, request);
 
         // Send a message to the receiver indicating the duel request
-        receiver.sendMessage(sender.getName() + " has challenged you to a duel. Type "+ChatColor.GREEN+"/accept or "+ChatColor.RED+"/decline to respond.");
-        sender.sendMessage("Sent Duel request to "+receiver.getName());
+        receiver.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+sender.getName() + " has challenged you to a duel. Type "+ChatColor.GREEN+"/accept or "+ChatColor.RED+"/decline to respond.");
+        sender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"Sent Duel request to "+receiver.getName());
     }
 
 

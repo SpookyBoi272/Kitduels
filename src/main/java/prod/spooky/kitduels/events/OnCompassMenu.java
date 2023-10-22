@@ -114,16 +114,5 @@ public class OnCompassMenu implements Listener {
         return inventory;
     }
 
-//    private String getPlayerHeadOwner(ItemStack playerHead) {
-//        if (playerHead != null && playerHead.getType() == Material.PLAYER_HEAD) {
-//            if (playerHead.hasItemMeta() && playerHead.getItemMeta() instanceof SkullMeta skullMeta) {
-//
-//                if (skullMeta.hasOwner()) {
-//                    return skullMeta.getOwningPlayer().getName();
-//                }
-//            }
-//        }
-//        return null;
-//    }
 }
 

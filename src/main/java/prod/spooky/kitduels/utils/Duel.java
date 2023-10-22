@@ -5,7 +5,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import prod.spooky.kitduels.Kitduels;
+import prod.spooky.kitduels.kits.AxeKit;
 import prod.spooky.kitduels.kits.DiamondKit;
+import prod.spooky.kitduels.kits.NetheritePotKit;
+
 import java.util.*;
 
 public class Duel implements Listener {
@@ -32,10 +35,10 @@ public class Duel implements Listener {
         playerTimeMap.remove(playerUUID);
     }
 
-    public void startDuel(Player player, Player target) {
+    public void startDuel(Player player, Player target, String kit, String map) {
         sendDuelMsg(player, target);
-        setupPlayers(player, target);
-        loadKit(player, target);
+        setupPlayers(player, target, map);
+        loadKit(player, target, kit);
         addPlayer(target.getUniqueId());
         addPlayer(player.getUniqueId());
         startCountDown(player, target);
@@ -46,11 +49,27 @@ public class Duel implements Listener {
         target.sendMessage(ChatColor.RED + "[KitDuels] " + ChatColor.WHITE + "You have started a duel with " + player.getName());
     }
 
-    private void setupPlayers(Player player, Player target) {
-        World arena = Objects.requireNonNull(Bukkit.getWorld("Arena"));
+    private void setupPlayers(Player player, Player target, String map) {
+        World arena = Objects.requireNonNull(Bukkit.getWorld(map));
         player.teleport(arena.getSpawnLocation());
-        Location targetLocation = new Location(arena, 0, 68, -36);
-        target.teleport(targetLocation);
+        switch (map) {
+            case "Arena" -> {
+                Location targetLocation = new Location(arena, 0, 68, -36);
+                target.teleport(targetLocation);
+            }
+            case "Fractal" -> {
+                Location targetLocation = new Location(arena, 0, 68, -36);
+                target.teleport(targetLocation);
+            }
+            case "Museum" -> {
+                Location targetLocation = new Location(arena, 0, 68, -36);
+                target.teleport(targetLocation);
+            }
+            case "Highset" -> {
+                Location targetLocation = new Location(arena, 0, 68, -36);
+                target.teleport(targetLocation);
+            }
+        }
         player.getInventory().clear();
         player.setFoodLevel(2000);
         player.setHealth(20);
@@ -59,10 +78,24 @@ public class Duel implements Listener {
         target.setHealth(20);
     }
 
-    private void loadKit(Player player, Player target) {
-        DiamondKit kit = new DiamondKit();
-        kit.addItems(player);
-        kit.addItems(target);
+    private void loadKit(Player player, Player target, String Kit) {
+        switch (Kit) {
+            case "Axe" -> {
+                AxeKit kit = new AxeKit();
+                kit.addItems(player);
+                kit.addItems(target);
+            }
+            case "Diamond" -> {
+                DiamondKit kit = new DiamondKit();
+                kit.addItems(player);
+                kit.addItems(target);
+            }
+            case "Netherite" -> {
+                NetheritePotKit kit = new NetheritePotKit();
+                kit.addItems(player);
+                kit.addItems(target);
+            }
+        }
         player.setInvulnerable(false);
         target.setInvulnerable(false);
     }

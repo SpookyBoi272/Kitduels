@@ -4,15 +4,32 @@ import java.util.*;
 
 public class DuelRequest {
 
-
     private UUID sender;
     private UUID receiver;
     private long requestTime;
+    private String kit;
+    private String map;
 
     public DuelRequest(UUID sender, UUID receiver) {
         this.sender = sender;
         this.receiver = receiver;
         this.requestTime = System.currentTimeMillis();
+    }
+
+    public String getKit() {
+        return kit;
+    }
+
+    public void setKit(String kit) {
+        this.kit = kit;
+    }
+
+    public String getMap() {
+        return map;
+    }
+
+    public void setMap(String map) {
+        this.map = map;
     }
 
     public UUID getSender() {
@@ -23,7 +40,4 @@ public class DuelRequest {
         return receiver;
     }
 
-    public long getRequestTime() {
-        return requestTime;
-    }
 }

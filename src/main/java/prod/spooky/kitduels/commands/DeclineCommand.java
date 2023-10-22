@@ -41,7 +41,7 @@ public class DeclineCommand implements CommandExecutor {
             // Handle declining the duel request
             player.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You have declined the duel request from " + Bukkit.getOfflinePlayer(request.getSender()).getName());
         }else {
-            // No pending request from the player
+            // no pending request from the player
             player.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You don't have any pending duel requests to reject.");
         }
     }
