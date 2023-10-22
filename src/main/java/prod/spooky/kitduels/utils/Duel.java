@@ -34,7 +34,7 @@ public class Duel implements Listener {
 
     public void startDuel(Player player, Player target) {
         sendDuelMsg(player, target);
-        tpPlayers(player, target);
+        setupPlayers(player, target);
         loadKit(player, target);
         addPlayer(target.getUniqueId());
         addPlayer(player.getUniqueId());
@@ -46,11 +46,17 @@ public class Duel implements Listener {
         target.sendMessage(ChatColor.RED + "[KitDuels] " + ChatColor.WHITE + "You have started a duel with " + player.getName());
     }
 
-    private void tpPlayers(Player player, Player target) {
+    private void setupPlayers(Player player, Player target) {
         World arena = Objects.requireNonNull(Bukkit.getWorld("Arena"));
         player.teleport(arena.getSpawnLocation());
         Location targetLocation = new Location(arena, 0, 68, -36);
         target.teleport(targetLocation);
+        player.getInventory().clear();
+        player.setFoodLevel(2000);
+        player.setHealth(20);
+        target.getInventory().clear();
+        target.setFoodLevel(2000);
+        target.setHealth(20);
     }
 
     private void loadKit(Player player, Player target) {

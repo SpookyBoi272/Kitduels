@@ -1,6 +1,7 @@
 package prod.spooky.kitduels.commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,9 +20,9 @@ public class DeclineCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (commandSender instanceof Player){
             if(strings.length<1){
-                commandSender.sendMessage("Invalid Usage of Command.");
+                commandSender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"Invalid Usage of Command.");
             }else if (Bukkit.getPlayer(strings[0])== null){
-                commandSender.sendMessage("This Player is Offline.");
+                commandSender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"This Player is Offline.");
             } else {
                 declineDuelRequest(Objects.requireNonNull(Bukkit.getPlayer(strings[0])));
             }
@@ -38,10 +39,10 @@ public class DeclineCommand implements CommandExecutor {
 
         if (request != null) {
             // Handle declining the duel request
-            player.sendMessage("You have declined the duel request from " + Bukkit.getOfflinePlayer(request.getSender()).getName());
+            player.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You have declined the duel request from " + Bukkit.getOfflinePlayer(request.getSender()).getName());
         }else {
             // No pending request from the player
-            player.sendMessage("You don't have any pending duel requests to reject.");
+            player.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You don't have any pending duel requests to reject.");
         }
     }
 

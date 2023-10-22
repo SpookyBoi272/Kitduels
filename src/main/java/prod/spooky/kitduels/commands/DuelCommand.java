@@ -43,7 +43,9 @@ public class DuelCommand implements CommandExecutor, Listener {
             if (!(Duel.playersInDuel.contains(target.getUniqueId()))){
                 Duel.playersInDuel.add(p.getUniqueId());
                 Duel.playersInDuel.add(target.getUniqueId());
+                if (strings.length == 1){
 
+                }
                 sendDuelRequest(p,target);
             }
         }else {

@@ -1,6 +1,7 @@
 package prod.spooky.kitduels.commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -20,9 +21,9 @@ public class AcceptCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (commandSender instanceof Player){
             if(strings.length<1){
-                commandSender.sendMessage("Invalid Usage of Command.");
+                commandSender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"Invalid Usage of Command.");
             }else if (Bukkit.getPlayer(strings[0])==null){
-                commandSender.sendMessage("This Player is Offline.");
+                commandSender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"This Player is Offline.");
             } else{
                 acceptDuelRequest((Player) commandSender);
             }
@@ -41,16 +42,16 @@ public class AcceptCommand implements CommandExecutor {
             UUID senderUUID = request.getSender();
             if (senderUUID.equals(playerUUID)) {
                 // The player is accepting their own request, handle it accordingly
-                acceptingplayer.sendMessage("You can't accept your own duel request.");
+                acceptingplayer.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You can't accept your own duel request.");
             } else {
                 // Handle accepting the duel request (start the duel)
                 Duel duel = new Duel();
                 duel.startDuel(acceptingplayer,Bukkit.getPlayer(request.getSender()));
-                acceptingplayer.sendMessage("You have accepted the duel request from " + Bukkit.getOfflinePlayer(senderUUID).getName());
+                acceptingplayer.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You have accepted the duel request from " + Bukkit.getOfflinePlayer(senderUUID).getName());
             }
         } else {
             // No pending request from the player
-            acceptingplayer.sendMessage("You don't have any pending duel requests to accept.");
+            acceptingplayer.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You don't have any pending duel requests to accept.");
         }
     }
 

@@ -10,8 +10,6 @@ public class DiamondKit {
     ItemStack armor2 = new ItemStack(Material.DIAMOND_CHESTPLATE);
     ItemStack armor3 = new ItemStack(Material.DIAMOND_LEGGINGS);
     ItemStack armor4 = new ItemStack(Material.DIAMOND_BOOTS);
-//    ItemStack armor5 = new ItemStack(Material.SHIELD);
-//    ItemStack blocks = new ItemStack(Material.STONE_BRICKS, 64);
     ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
     ItemStack axe = new ItemStack(Material.DIAMOND_AXE);
     ItemStack bow = new ItemStack(Material.BOW);
@@ -19,8 +17,6 @@ public class DiamondKit {
     ItemStack food = new ItemStack(Material.COOKED_BEEF, 64);
     ItemStack arrow = new ItemStack(Material.ARROW, 16);
     ItemStack pearl = new ItemStack(Material.ENDER_PEARL,3);
-//    ItemStack water = new ItemStack(Material.WATER_BUCKET);
-//    ItemStack lava = new ItemStack(Material.LAVA_BUCKET);
 
     ItemStack[] diamondKit = {sword, axe, bow, arrow, apple, food, pearl};
     public DiamondKit() {
@@ -29,14 +25,10 @@ public class DiamondKit {
     }
 
     public void addItems(Player p){
-        p.getInventory().clear();
-        p.setFoodLevel(2000);
-        p.setHealth(20);
         p.getInventory().addItem(diamondKit);
         p.getInventory().setHelmet(armor1);
         p.getInventory().setChestplate(armor2);
         p.getInventory().setLeggings(armor3);
         p.getInventory().setBoots(armor4);
-//        p.getInventory().setItemInOffHand(armor5);
     }
 }

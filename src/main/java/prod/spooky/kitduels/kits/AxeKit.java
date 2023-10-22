@@ -23,9 +23,6 @@ public class AxeKit {
         }
 
         public void addItems(Player p){
-            p.getInventory().clear();
-            p.setFoodLevel(2000);
-            p.setHealth(20);
             p.getInventory().addItem(axeKit);
             p.getInventory().setHelmet(armor1);
             p.getInventory().setChestplate(armor2);
