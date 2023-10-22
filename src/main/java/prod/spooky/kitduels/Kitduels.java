@@ -10,7 +10,6 @@ import prod.spooky.kitduels.commands.HubCommand;
 import prod.spooky.kitduels.events.OnCompassMenu;
 import prod.spooky.kitduels.events.OnPlayerJoin;
 import prod.spooky.kitduels.events.OnPlayerDeath;
-import prod.spooky.kitduels.utils.Duel;
 
 public final class Kitduels extends JavaPlugin {
 
