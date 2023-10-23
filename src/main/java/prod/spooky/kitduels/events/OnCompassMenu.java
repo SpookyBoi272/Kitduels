@@ -119,7 +119,7 @@ public class OnCompassMenu implements Listener {
                 addItemToGUI(gui, Material.DIAMOND_SWORD, "Sword", ChatColor.LIGHT_PURPLE);
                 addItemToGUI(gui, Material.SHIELD, "Shield", ChatColor.LIGHT_PURPLE);
                 addItemToGUI(gui, Material.ENCHANTED_GOLDEN_APPLE, "Buff", ChatColor.LIGHT_PURPLE);
-                addItemToGUI(gui, Material.LAVA_BUCKET, "BuildUHC", ChatColor.LIGHT_PURPLE);
+//                addItemToGUI(gui, Material.LAVA_BUCKET, "BuildUHC", ChatColor.LIGHT_PURPLE);
                 player.openInventory(gui);
                 receiver = Bukkit.getPlayer(receiverName);
             }
@@ -164,7 +164,6 @@ public class OnCompassMenu implements Listener {
         addItemToGUI(gui, Material.ORANGE_WOOL, "Arena", ChatColor.GOLD);
         addItemToGUI(gui, Material.SEA_LANTERN, "SkyPort", ChatColor.AQUA);
         addItemToGUI(gui, Material.OAK_LEAVES, "Highset", ChatColor.GREEN);
-        addItemToGUI(gui, Material.PURPLE_STAINED_GLASS, "Fractal", ChatColor.DARK_PURPLE);
         player.openInventory(gui);
     }
 
@@ -182,8 +181,6 @@ public class OnCompassMenu implements Listener {
                 map = "Museum";
             } else if (clickedItem!=null && Objects.equals(clickedItem.getItemMeta().displayName().toString(), ChatColor.GOLD + "Arena")){
                 map = "Arena";
-            } else if (clickedItem!=null && Objects.equals(clickedItem.getItemMeta().displayName().toString(), ChatColor.AQUA + "SkyPort")){
-                map = "SkyPort";
             }else if (clickedItem!=null && Objects.equals(clickedItem.getItemMeta().displayName().toString(), ChatColor.AQUA + "Highset")){
                 map = "Highset";
             }else if (clickedItem!=null && Objects.equals(clickedItem.getItemMeta().displayName().toString(), ChatColor.AQUA + "Fractal")){

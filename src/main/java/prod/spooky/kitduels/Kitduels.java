@@ -35,6 +35,7 @@ public final class Kitduels extends JavaPlugin {
 
     private void setCommands(){
         getCommand("Duel").setExecutor(new DuelCommand());
+        getCommand("Duel").setTabCompleter(new DuelTabList());
         getCommand("Hub").setExecutor(new HubCommand());
         getCommand("accept").setExecutor(new AcceptCommand());
         getCommand("decline").setExecutor(new DeclineCommand());

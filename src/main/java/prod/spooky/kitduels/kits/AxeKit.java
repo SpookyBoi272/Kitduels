@@ -17,7 +17,7 @@ public class AxeKit {
         ItemStack food = new ItemStack(Material.COOKED_BEEF, 3);
         ItemStack arrow = new ItemStack(Material.ARROW, 10);
 
-        ItemStack[] axeKit = {sword, axe, bow, arrow, food};
+        ItemStack[] axeKit = {sword, axe, bow, crossbow, arrow, food};
         public AxeKit() {
 
         }
