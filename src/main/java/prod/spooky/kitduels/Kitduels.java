@@ -2,16 +2,25 @@ package prod.spooky.kitduels;
 
 import org.bukkit.Bukkit;
 import org.bukkit.WorldCreator;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import prod.spooky.kitduels.commands.*;
-import prod.spooky.kitduels.events.OnCompassMenu;
 import prod.spooky.kitduels.events.OnPlayerJoin;
 import prod.spooky.kitduels.events.OnPlayerDeath;
+import prod.spooky.kitduels.listeners.CompassListener;
+import prod.spooky.kitduels.listeners.MenuListener;
+import prod.spooky.kitduels.menusystem.PlayerMenuUtility;
+
+import java.util.HashMap;
 
 public final class Kitduels extends JavaPlugin {
 
+    private static Kitduels plugin;
+    private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
+
     @Override
     public void onEnable() {
+        plugin = this;
         registerEvents();
         setCommands();
         Bukkit.unloadWorld("hub_nether", false);
@@ -24,13 +33,17 @@ public final class Kitduels extends JavaPlugin {
         arenaLoader4.createWorld();
         WorldCreator arenaLoader5 = new WorldCreator("Fractal");
         arenaLoader5.createWorld();
+
+
     }
 
     private void registerEvents(){
         getServer().getPluginManager().registerEvents(new OnPlayerJoin(), this);
-        getServer().getPluginManager().registerEvents(new OnCompassMenu(), this);
+        getServer().getPluginManager().registerEvents(new CompassListener(), this);
         getServer().getPluginManager().registerEvents(new OnPlayerDeath(), this);
         getServer().getPluginManager().registerEvents(new DuelCommand(), this);
+
+        getServer().getPluginManager().registerEvents(new MenuListener(), this);
     }
 
     private void setCommands(){
@@ -40,5 +53,25 @@ public final class Kitduels extends JavaPlugin {
         getCommand("accept").setExecutor(new AcceptCommand());
         getCommand("decline").setExecutor(new DeclineCommand());
         getCommand("goto").setExecutor(new GotoCommand());
+    }
+
+    //Provide a player and return a menu system for that player
+    //create one if they don't already have one
+    public static PlayerMenuUtility getPlayerMenuUtility(Player p) {
+        PlayerMenuUtility playerMenuUtility;
+        if (!(playerMenuUtilityMap.containsKey(p))) { //See if the player has a playermenuutility "saved" for them
+
+            //This player doesn't. Make one for them add add it to the hashmap
+            playerMenuUtility = new PlayerMenuUtility(p);
+            playerMenuUtilityMap.put(p, playerMenuUtility);
+
+            return playerMenuUtility;
+        } else {
+            return playerMenuUtilityMap.get(p); //Return the object by using the provided player
+        }
+    }
+
+    public static Kitduels getPlugin() {
+        return plugin;
     }
 }
