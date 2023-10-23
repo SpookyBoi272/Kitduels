@@ -28,7 +28,7 @@ public class OnCompassMenu implements Listener {
     public void onCompassRightClick(PlayerInteractEvent event) {
         if (event.getItem() != null && event.getItem().getType() == Material.COMPASS) {
             Hubitems hub = new Hubitems();
-            if (event.getAction().name().contains("RIGHT")) {
+            if (event.getAction().name().contains("RIGHT") && event.getItem().hasItemMeta()) {
                 openMainMenu(event.getPlayer());
             }
         }
