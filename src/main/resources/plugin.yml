@@ -18,3 +18,5 @@ commands:
   Decline:
     description: "Decline incoming duel requests"
     usage: /<command> <player>
+  goto:
+    description: "Go anywhere"

@@ -61,19 +61,15 @@ public class Duel {
                 target.teleport(targetLocation);
             }
             case "Fractal" -> {
-                Location targetLocation = new Location(arena, 0, 65, -33);
+                Location targetLocation = new Location(arena, 0, 65, 38,180,0);
                 target.teleport(targetLocation);
             }
             case "Museum" -> {
-                Location targetLocation = new Location(arena, 1, 71, 35);
+                Location targetLocation = new Location(arena, 0, 71, 33,0,0);
                 target.teleport(targetLocation);
             }
             case "Highset" -> {
-                Location targetLocation = new Location(arena, -37, 72, 0);
-                target.teleport(targetLocation);
-            }
-            case "SkyPort" -> {
-                Location targetLocation = new Location(arena, 0, 75, 38);
+                Location targetLocation = new Location(arena, -37, 72, 0,-90,0);
                 target.teleport(targetLocation);
             }
         }

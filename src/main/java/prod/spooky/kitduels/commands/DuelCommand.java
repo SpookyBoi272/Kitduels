@@ -30,7 +30,7 @@ public class DuelCommand implements CommandExecutor, Listener {
 
         if (commandSender instanceof Player p){
             kit.add("Shield"); kit.add("Buff"); kit.add("Sword");
-            map.add("SkyPort"); map.add("Museum"); map.add("Arena"); map.add("Highset"); map.add("Fractal");
+            map.add("Museum"); map.add("Arena"); map.add("Highset"); map.add("Fractal");
             if (strings.length==3){
                 if (Bukkit.getPlayer(strings[0])!=null && kit.contains(strings[1]) && map.contains(strings[2])){
 //                    OnCompassMenu menu = new OnCompassMenu();

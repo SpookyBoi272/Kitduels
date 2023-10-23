@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
 import prod.spooky.kitduels.utils.Hubitems;
 
@@ -16,9 +17,15 @@ import java.util.Objects;
 
 public class OnPlayerJoin implements Listener {
     @EventHandler
-    public void onJoin(PlayerJoinEvent event){
+    public void onJoin(PlayerJoinEvent event) {
         Player p = event.getPlayer();
         setup(p);
+        event.setJoinMessage(ChatColor.GRAY+"["+ChatColor.AQUA+"+"+ChatColor.GRAY+"] "+ChatColor.YELLOW+event.getPlayer().getName());
+    }
+
+    @EventHandler
+    public void onLeave(PlayerQuitEvent event){
+        event.setQuitMessage(ChatColor.GRAY+"["+ChatColor.RED+"-"+ChatColor.GRAY+"] "+ChatColor.YELLOW+event.getPlayer().getName());
     }
 
     @EventHandler

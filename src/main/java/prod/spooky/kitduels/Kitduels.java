@@ -3,10 +3,7 @@ package prod.spooky.kitduels;
 import org.bukkit.Bukkit;
 import org.bukkit.WorldCreator;
 import org.bukkit.plugin.java.JavaPlugin;
-import prod.spooky.kitduels.commands.AcceptCommand;
-import prod.spooky.kitduels.commands.DeclineCommand;
-import prod.spooky.kitduels.commands.DuelCommand;
-import prod.spooky.kitduels.commands.HubCommand;
+import prod.spooky.kitduels.commands.*;
 import prod.spooky.kitduels.events.OnCompassMenu;
 import prod.spooky.kitduels.events.OnPlayerJoin;
 import prod.spooky.kitduels.events.OnPlayerDeath;
@@ -23,8 +20,6 @@ public final class Kitduels extends JavaPlugin {
         arenaLoader.createWorld();
         WorldCreator arenaLoader2 = new WorldCreator("Museum");
         arenaLoader2.createWorld();
-        WorldCreator arenaLoader3 = new WorldCreator("SkyPort");
-        arenaLoader3.createWorld();
         WorldCreator arenaLoader4 = new WorldCreator("Highset");
         arenaLoader4.createWorld();
         WorldCreator arenaLoader5 = new WorldCreator("Fractal");
@@ -43,5 +38,6 @@ public final class Kitduels extends JavaPlugin {
         getCommand("Hub").setExecutor(new HubCommand());
         getCommand("accept").setExecutor(new AcceptCommand());
         getCommand("decline").setExecutor(new DeclineCommand());
+        getCommand("goto").setExecutor(new GotoCommand());
     }
 }
