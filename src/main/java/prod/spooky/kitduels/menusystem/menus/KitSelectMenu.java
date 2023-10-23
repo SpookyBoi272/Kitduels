@@ -27,7 +27,6 @@ public class KitSelectMenu extends Menu {
     @Override
     public void handleMenu(InventoryClickEvent e) {
         String kit = ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName());
-//        PlayerMenuUtility playerMenuUtility = Kitduels.getPlayerMenuUtility((Player) e.getWhoClicked());
         playerMenuUtility.setKit(kit);
 
         MapSelectMenu menu = new MapSelectMenu(playerMenuUtility);

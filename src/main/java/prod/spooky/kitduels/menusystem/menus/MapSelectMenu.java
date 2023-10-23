@@ -31,7 +31,6 @@ public class MapSelectMenu extends Menu {
     public void handleMenu(InventoryClickEvent e) {
         String map = ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName());
         Player player = (Player) e.getWhoClicked();
-//        PlayerMenuUtility info = Kitduels.getPlayerMenuUtility(player);
         playerMenuUtility.setMap(map);
 
         player.closeInventory();

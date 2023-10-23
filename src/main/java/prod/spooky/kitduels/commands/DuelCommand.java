@@ -41,29 +41,6 @@ public class DuelCommand implements CommandExecutor, Listener {
                 p.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"Invalid Usage of Command. Use Compass For GUI");
                 p.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"Type \"/help duel\" for further information");
             }
-
-
-//            if (strings.length<1) {
-//                p.sendMessage("Invalid Usage of Command");
-//                p.sendMessage("Type \"/help duel\" for further information");
-//                p.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"Please Select a player to duel.");
-//                return true;
-//            }
-//            if (Bukkit.getPlayer(strings[0])==null){
-//                p.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"Player is currently offline.");
-//                return true;
-//            }
-//            if (Duel.playersInDuel.contains(Bukkit.getPlayer(strings[0]).getUniqueId())){
-//                p.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"Player is already in a Duel.");
-//                return true;
-//            }
-//            Player target = Bukkit.getPlayer(strings[0]);
-//            if (!(Duel.playersInDuel.contains(target.getUniqueId()))){
-//                Duel.playersInDuel.add(p.getUniqueId());
-//                Duel.playersInDuel.add(target.getUniqueId());
-//
-////                sendDuelRequest(p,target);
-//            }
         }else {
             System.out.println("This command must be executed by a player");
         }
@@ -85,19 +62,6 @@ public class DuelCommand implements CommandExecutor, Listener {
         sender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"Sent Duel request to "+receiver.getName());
     }
 
-//    public void sendDuelRequest(Player sender, Player receiver) {
-//        UUID senderUUID = sender.getUniqueId();
-//        UUID receiverUUID = receiver.getUniqueId();
-//
-////        DuelRequest request = new DuelRequest(senderUUID, receiverUUID);
-////        DuelCommand.pendingRequests.put(receiverUUID, request);
-//
-//        // Send a message to the receiver indicating the duel request
-//        receiver.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+sender.getName() + " has challenged you to a duel. Type "+ChatColor.GREEN+"/accept or "+ChatColor.RED+"/decline to respond.");
-//        sender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"Sent Duel request to "+receiver.getName());
-//    }
-
-
     @EventHandler
     public void onDuelEnd(PlayerDeathEvent event){
         if ((event.getPlayer().getKiller()!= null)){
@@ -108,9 +72,6 @@ public class DuelCommand implements CommandExecutor, Listener {
                 Duel.removePlayer(event.getPlayer());
                 Duel.removePlayer(event.getPlayer().getKiller());
                 Bukkit.dispatchCommand(event.getPlayer().getKiller(),"hub");
-                Bukkit.unloadWorld("Arena",false);
-                WorldCreator arenaLoader = new WorldCreator("Arena");
-                arenaLoader.createWorld();
             }
         }
     }
