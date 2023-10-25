@@ -54,21 +54,28 @@ public class Duel {
 
     private void setupPlayers(Player player, Player target, String map) {
         World arena = Objects.requireNonNull(Bukkit.getWorld(map));
-        player.teleport(arena.getSpawnLocation());
         switch (map) {
             case "Arena" -> {
+                Location spawnLocation = new Location(arena,0,68,34,180,0);
+                player.teleport(spawnLocation);
                 Location targetLocation = new Location(arena, 0, 68, -36);
                 target.teleport(targetLocation);
             }
             case "Fractal" -> {
+                Location spawnLocation = new Location(arena,0,65,-38,0,0);
+                player.teleport(spawnLocation);
                 Location targetLocation = new Location(arena, 0, 65, 38,180,0);
                 target.teleport(targetLocation);
             }
             case "Museum" -> {
-                Location targetLocation = new Location(arena, 0, 71, 33,0,0);
+                Location spawnLocation = new Location(arena,0,71,-33,0,0);
+                player.teleport(spawnLocation);
+                Location targetLocation = new Location(arena, 0, 71, 33,180,0);
                 target.teleport(targetLocation);
             }
             case "Highset" -> {
+                Location spawnLocation = new Location(arena,36,72,0,90,0);
+                player.teleport(spawnLocation);
                 Location targetLocation = new Location(arena, -37, 72, 0,-90,0);
                 target.teleport(targetLocation);
             }
@@ -110,7 +117,7 @@ public class Duel {
                 long currentTime = System.currentTimeMillis();
                 long playerTime = Duel.getPlayerTime(player);
                 long diff = currentTime - playerTime;
-                int remTime = 5 - (((int)(diff)) / 1000);
+                int remTime = 4 - (((int)(diff)) / 1000);
                 System.out.println("Diff:"+diff);
                 System.out.println(remTime);
                 System.out.println(playerTimeMap.size());

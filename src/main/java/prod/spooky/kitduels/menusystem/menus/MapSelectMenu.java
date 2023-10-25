@@ -34,7 +34,7 @@ public class MapSelectMenu extends Menu {
         playerMenuUtility.setMap(map);
 
         player.closeInventory();
-        System.out.println(playerMenuUtility.getKit());
+        System.out.println(playerMenuUtility.getKit()+playerMenuUtility.getMap()+playerMenuUtility.getOpponent());
         Bukkit.dispatchCommand(player,"duel "+playerMenuUtility.getOpponent()+" "+playerMenuUtility.getKit()+" "+playerMenuUtility.getMap());
     }
 
@@ -42,7 +42,7 @@ public class MapSelectMenu extends Menu {
     public void setMenuItems() {
         addItemToGUI(inventory, Material.MOSSY_STONE_BRICKS, "Museum", ChatColor.LIGHT_PURPLE);
         addItemToGUI(inventory, Material.ORANGE_WOOL, "Arena", ChatColor.GOLD);
-        addItemToGUI(inventory, Material.SEA_LANTERN, "SkyPort", ChatColor.AQUA);
+        addItemToGUI(inventory, Material.SEA_LANTERN, "Fractal", ChatColor.AQUA);
         addItemToGUI(inventory, Material.OAK_LEAVES, "Highset", ChatColor.GREEN);
         setFillerGlass();
     }

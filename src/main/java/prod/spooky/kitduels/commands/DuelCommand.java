@@ -32,7 +32,7 @@ public class DuelCommand implements CommandExecutor, Listener {
             kit.add("Shield"); kit.add("Buff"); kit.add("Sword");
             map.add("Museum"); map.add("Arena"); map.add("Highset"); map.add("Fractal");
             if (strings.length==3){
-                if (Bukkit.getPlayer(strings[0])!=null && Objects.equals(p,Bukkit.getPlayer(strings[0])) && kit.contains(strings[1]) && map.contains(strings[2])){
+                if (Bukkit.getPlayer(strings[0])!=null && !Objects.equals(p,Bukkit.getPlayer(strings[0])) && kit.contains(strings[1]) && map.contains(strings[2])){
 //                    OnCompassMenu menu = new OnCompassMenu();
 //                    menu.sendDuelRequest(p, Objects.requireNonNull(Bukkit.getPlayer(strings[0])));
                     sendDuelRequest(p, Objects.requireNonNull(Bukkit.getPlayer(strings[0])),strings[1], strings[2]);
@@ -51,8 +51,6 @@ public class DuelCommand implements CommandExecutor, Listener {
         UUID receiverUUID = receiver.getUniqueId();
 
         DuelRequest request = new DuelRequest(senderUUID, receiverUUID, kit1, map1);
-        System.out.println(kit1);
-        System.out.println(request.getKit());
         DuelCommand.pendingRequests.put(receiverUUID, request);
 
         // Send a message to the receiver indicating the duel request
