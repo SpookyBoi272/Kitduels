@@ -23,18 +23,7 @@ public final class Kitduels extends JavaPlugin {
         plugin = this;
         registerEvents();
         setCommands();
-        Bukkit.unloadWorld("hub_nether", false);
-        Bukkit.unloadWorld("hub_the_end", false);
-        WorldCreator arenaLoader = new WorldCreator("Arena");
-        arenaLoader.createWorld();
-        WorldCreator arenaLoader2 = new WorldCreator("Museum");
-        arenaLoader2.createWorld();
-        WorldCreator arenaLoader4 = new WorldCreator("Highset");
-        arenaLoader4.createWorld();
-        WorldCreator arenaLoader5 = new WorldCreator("Fractal");
-        arenaLoader5.createWorld();
-
-
+        loadArenas();
     }
 
     private void registerEvents(){
@@ -53,6 +42,19 @@ public final class Kitduels extends JavaPlugin {
         getCommand("accept").setExecutor(new AcceptCommand());
         getCommand("decline").setExecutor(new DeclineCommand());
         getCommand("goto").setExecutor(new GotoCommand());
+    }
+
+    private void loadArenas(){
+        Bukkit.unloadWorld("hub_nether", false);
+        Bukkit.unloadWorld("hub_the_end", false);
+        WorldCreator arenaLoader = new WorldCreator("Arena");
+        arenaLoader.createWorld();
+        WorldCreator arenaLoader2 = new WorldCreator("Museum");
+        arenaLoader2.createWorld();
+        WorldCreator arenaLoader4 = new WorldCreator("Highset");
+        arenaLoader4.createWorld();
+        WorldCreator arenaLoader5 = new WorldCreator("Fractal");
+        arenaLoader5.createWorld();
     }
 
     //Provide a player and return a menu system for that player

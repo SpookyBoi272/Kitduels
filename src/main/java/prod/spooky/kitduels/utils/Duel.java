@@ -13,13 +13,27 @@ import java.util.*;
 public class Duel {
     public static List<UUID> playersInDuel = new ArrayList<>();
     public static Map<UUID, Long> playerTimeMap = new HashMap<>();
+    public static List<String> activeMaps = new ArrayList<>();
     Kitduels plugin = JavaPlugin.getPlugin(Kitduels.class);
 
+    public void startDuel(Player player, Player target, String kit, String map) {
+        activeMaps.add(map);
+        sendDuelMsg(player, target);
+        setupPlayers(player, target, map);
+        loadKit(player, target, kit);
+        addPlayer(player,target);
+        startCountDown(player, target);
+    }
 
-    // Method to add a player to the map with the current time
-    public static void addPlayer(UUID playerUUID) {
+    // Method to add a player to the map with the current time and Also adds To the playersInDuel list
+    public static void addPlayer(Player player, Player target) {
+        UUID playerUUID = player.getUniqueId();
+        UUID targetUUID = target.getUniqueId();
         long currentTime = System.currentTimeMillis();
         playerTimeMap.put(playerUUID, currentTime);
+        playerTimeMap.put(targetUUID,currentTime);
+        playersInDuel.add(playerUUID);
+        playersInDuel.add(targetUUID);
     }
 
     // Method to retrieve the time for a player
@@ -32,19 +46,6 @@ public class Duel {
     public static void removePlayer(Player player) {
         UUID playerUUID = player.getUniqueId();
         playerTimeMap.remove(playerUUID);
-    }
-
-    public void startDuel(Player player, Player target, String kit, String map) {
-        System.out.println(kit);
-        System.out.println(map);
-        sendDuelMsg(player, target);
-        setupPlayers(player, target, map);
-        loadKit(player, target, kit);
-        playersInDuel.add(player.getUniqueId());
-        playersInDuel.add(target.getUniqueId());
-        addPlayer(target.getUniqueId());
-        addPlayer(player.getUniqueId());
-        startCountDown(player, target);
     }
 
     private void sendDuelMsg(Player player, Player target) {
@@ -117,7 +118,7 @@ public class Duel {
                 long currentTime = System.currentTimeMillis();
                 long playerTime = Duel.getPlayerTime(player);
                 long diff = currentTime - playerTime;
-                int remTime = 4 - (((int)(diff)) / 1000);
+                int remTime = 3 - (((int)(diff)) / 1000);
                 System.out.println("Diff:"+diff);
                 System.out.println(remTime);
                 System.out.println(playerTimeMap.size());

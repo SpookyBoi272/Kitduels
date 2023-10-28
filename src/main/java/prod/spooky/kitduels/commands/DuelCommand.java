@@ -69,6 +69,7 @@ public class DuelCommand implements CommandExecutor, Listener {
                 Duel.playersInDuel.remove(event.getPlayer().getKiller().getUniqueId());
                 Duel.removePlayer(event.getPlayer());
                 Duel.removePlayer(event.getPlayer().getKiller());
+                Duel.activeMaps.remove(event.getPlayer().getLocation().getWorld().toString());
                 Bukkit.dispatchCommand(event.getPlayer().getKiller(),"hub");
             }
         }

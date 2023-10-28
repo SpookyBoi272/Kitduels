@@ -31,18 +31,19 @@ public class PlayerSelectMenu extends Menu {
         String invName = e.getView().getTitle();
             System.out.println(e.getCurrentItem().getItemMeta().getDisplayName());
             Player opponent = Bukkit.getPlayer(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName()));
-//            PlayerMenuUtility playerMenuUtility = Kitduels.getPlayerMenuUtility((Player) e.getWhoClicked());
             playerMenuUtility.setOpponent(opponent);
 
             KitSelectMenu menu = new KitSelectMenu(playerMenuUtility);
             menu.open();
     }
 
-    @Override
     public void setMenuItems() {
+        String name = playerMenuUtility.getOwner().getDisplayName();
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             ItemStack playerHead = createPlayerHead(onlinePlayer.getName());
-            inventory.addItem(playerHead);
+            if (!playerHead.getItemMeta().getDisplayName().equals(name)){
+                inventory.addItem(playerHead);
+            }
         }
         setFillerGlass();
     }

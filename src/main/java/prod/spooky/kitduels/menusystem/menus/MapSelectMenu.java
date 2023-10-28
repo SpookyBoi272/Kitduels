@@ -8,9 +8,11 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import prod.spooky.kitduels.Kitduels;
 import prod.spooky.kitduels.menusystem.Menu;
 import prod.spooky.kitduels.menusystem.PlayerMenuUtility;
+import prod.spooky.kitduels.utils.Duel;
+
+import java.util.List;
 
 public class MapSelectMenu extends Menu {
     public MapSelectMenu(PlayerMenuUtility playerMenuUtility) {
@@ -30,6 +32,10 @@ public class MapSelectMenu extends Menu {
     @Override
     public void handleMenu(InventoryClickEvent e) {
         String map = ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName());
+        if (Duel.activeMaps.contains(map)){
+            e.getWhoClicked().sendMessage(ChatColor.RED+"This Map is Currently not Available for Duel");
+            return;
+        }
         Player player = (Player) e.getWhoClicked();
         playerMenuUtility.setMap(map);
 
@@ -51,6 +57,9 @@ public class MapSelectMenu extends Menu {
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(color + name);
+        if (Duel.activeMaps.contains(name)){
+            meta.setLore(List.of(new String[]{ChatColor.RED+"Not Available"}));
+        }
         item.setItemMeta(meta);
         gui.addItem(item);
     }
