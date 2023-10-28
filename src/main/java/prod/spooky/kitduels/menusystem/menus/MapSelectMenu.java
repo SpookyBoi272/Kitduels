@@ -40,7 +40,6 @@ public class MapSelectMenu extends Menu {
         playerMenuUtility.setMap(map);
 
         player.closeInventory();
-        System.out.println(playerMenuUtility.getKit()+playerMenuUtility.getMap()+playerMenuUtility.getOpponent());
         Bukkit.dispatchCommand(player,"duel "+playerMenuUtility.getOpponent()+" "+playerMenuUtility.getKit()+" "+playerMenuUtility.getMap());
     }
 

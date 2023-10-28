@@ -13,17 +13,17 @@ public class BuffKit {
     ItemStack armor3 = new ItemStack(Material.NETHERITE_LEGGINGS);
     ItemStack armor4 = new ItemStack(Material.NETHERITE_BOOTS);
     ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING);
-    ItemStack instantHealth = new ItemStack(Material.POTION);
+    ItemStack instantHealth = new ItemStack(Material.SPLASH_POTION);
     ItemStack speedPot = new ItemStack(Material.POTION);
     ItemStack strengthPot = new ItemStack(Material.POTION);
     ItemStack sword = new ItemStack(Material.NETHERITE_SWORD);
     ItemStack apple = new ItemStack(Material.GOLDEN_APPLE, 64);
-    ItemStack enchantBottle = new ItemStack(Material.EXPERIENCE_BOTTLE);
+    ItemStack enchantBottle = new ItemStack(Material.EXPERIENCE_BOTTLE, 64);
 
     public BuffKit() {
-        setPotionType(instantHealth, PotionEffectType.HEAL,100, 2 ,true );
-        setPotionType(speedPot, PotionEffectType.SPEED, 1800, 2, true);
-        setPotionType(strengthPot, PotionEffectType.INCREASE_DAMAGE, 1800 , 2, true);
+        setPotionType(instantHealth, "InstantHealth II", PotionEffectType.HEAL,1, 2 ,true );
+        setPotionType(speedPot, "Speed II", PotionEffectType.SPEED, 1800, 2, false);
+        setPotionType(strengthPot, "Strength II", PotionEffectType.INCREASE_DAMAGE, 1800 , 2, false);
         enchantArmour(armor1);
         enchantArmour(armor2);
         enchantArmour(armor3);
@@ -49,9 +49,10 @@ public class BuffKit {
         p.getInventory().setItem(location,item);
     }
 
-    public void setPotionType(ItemStack potion,PotionEffectType type, int duration, int amplifier, boolean isSplash) {
+    public void setPotionType(ItemStack potion, String displayName, PotionEffectType type, int duration, int amplifier, boolean isSplash) {
         PotionMeta meta = (PotionMeta) potion.getItemMeta();
         meta.addCustomEffect(new PotionEffect(type, duration, amplifier), isSplash);
+        meta.setDisplayName(displayName);
         potion.setItemMeta(meta);
     }
 

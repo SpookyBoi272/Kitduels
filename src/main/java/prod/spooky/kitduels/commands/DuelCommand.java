@@ -19,7 +19,7 @@ import prod.spooky.kitduels.utils.DuelRequest;
 import java.util.*;
 
 
-public class DuelCommand implements CommandExecutor, Listener {
+public class DuelCommand implements CommandExecutor {
     public static Map<UUID, DuelRequest> pendingRequests = new HashMap<>();
     public static ArrayList<String> kit = new ArrayList<>();
     public static ArrayList<String> map = new ArrayList<>();
@@ -46,48 +46,19 @@ public class DuelCommand implements CommandExecutor, Listener {
         }
         return true;
     }
-    public void sendDuelRequest(Player sender, Player receiver, String kit1, String map1) {
+
+    public void sendDuelRequest(Player sender, Player receiver, String kit, String map) {
         UUID senderUUID = sender.getUniqueId();
         UUID receiverUUID = receiver.getUniqueId();
 
-        DuelRequest request = new DuelRequest(senderUUID, receiverUUID, kit1, map1);
+        DuelRequest request = new DuelRequest(senderUUID, receiverUUID, kit, map);
         DuelCommand.pendingRequests.put(receiverUUID, request);
 
         // Send a message to the receiver indicating the duel request
         receiver.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+sender.getName() + " has challenged you to a duel.");
-        receiver.sendMessage("Kit:"+kit1+" Map:"+map1);
+        receiver.sendMessage(ChatColor.DARK_PURPLE+"Kit: "+kit+ChatColor.AQUA+"   Map: "+map);
         receiver.sendMessage("Type "+ChatColor.GREEN+"/accept"+ChatColor.WHITE+" or "+ChatColor.RED+"/decline "+ChatColor.WHITE+"to respond.");
         sender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"Sent Duel request to "+receiver.getName());
     }
 
-    @EventHandler
-    public void onDuelEnd(PlayerDeathEvent event){
-        if ((event.getPlayer().getKiller()!= null)){
-            if (Duel.playersInDuel.contains(event.getPlayer().getUniqueId())){
-                sendWinnerInfo(event.getPlayer(),event.getPlayer().getKiller(),event.getPlayer().getKiller().getHealth());
-                Duel.playersInDuel.remove(event.getPlayer().getUniqueId());
-                Duel.playersInDuel.remove(event.getPlayer().getKiller().getUniqueId());
-                Duel.removePlayer(event.getPlayer());
-                Duel.removePlayer(event.getPlayer().getKiller());
-                Duel.activeMaps.remove(event.getPlayer().getLocation().getWorld().toString());
-                Bukkit.dispatchCommand(event.getPlayer().getKiller(),"hub");
-            }
-        }
-    }
-
-    private void sendWinnerInfo(Player killed , Player killer, double health){
-        int hearts = (int) health/2;
-        killed.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You were defeated by "+killer.getName()+" with "+ChatColor.RED+hearts+"❤");
-        killer.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You won Duel against "+killed.getName()+" with "+ChatColor.RED+hearts+"❤");
-    }
-
-    @EventHandler
-    public void onPlayerMove(PlayerMoveEvent event){
-        Player p = event.getPlayer();
-        long currentTime = System.currentTimeMillis();
-        long playerTime = Duel.getPlayerTime(p);
-        if (playerTime != 0 && (currentTime-playerTime<5000L) ){
-            event.setCancelled(true);
-        }
-    }
 }

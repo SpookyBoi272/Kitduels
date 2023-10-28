@@ -118,11 +118,8 @@ public class Duel {
                 long currentTime = System.currentTimeMillis();
                 long playerTime = Duel.getPlayerTime(player);
                 long diff = currentTime - playerTime;
-                int remTime = 3 - (((int)(diff)) / 1000);
-                System.out.println("Diff:"+diff);
-                System.out.println(remTime);
-                System.out.println(playerTimeMap.size());
-                if (remTime<1){
+                int remTime = 4 - (((int)(diff)) / 1000);
+                if (remTime<2){
                     this.cancel();
                 }
                 player.sendTitle(ChatColor.AQUA + "Kit Duels", ChatColor.WHITE + "Duel is starting in "+remTime+" Seconds", 1, 20, 1);

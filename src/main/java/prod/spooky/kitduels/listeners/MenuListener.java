@@ -1,9 +1,11 @@
 package prod.spooky.kitduels.listeners;
 
+import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemStack;
 import prod.spooky.kitduels.menusystem.Menu;
 
 public class MenuListener implements Listener {
@@ -17,7 +19,8 @@ public class MenuListener implements Listener {
         // class implements InventoryHolder!!
         if (holder instanceof Menu) {
             e.setCancelled(true); //prevent them from fucking with the inventory
-            if (e.getCurrentItem() == null) { //deal with null exceptions
+            if (e.getCurrentItem() == null || e.getCurrentItem().equals(new ItemStack(Material.GRAY_STAINED_GLASS_PANE))) {
+                //deal with null exceptions
                 return;
             }
             //Since we know our inventory-holder is a menu, get the Menu Object representing

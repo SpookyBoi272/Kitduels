@@ -28,11 +28,10 @@ public class PlayerSelectMenu extends Menu {
 
     @Override
     public void handleMenu(InventoryClickEvent e) {
-        String invName = e.getView().getTitle();
-            System.out.println(e.getCurrentItem().getItemMeta().getDisplayName());
             Player opponent = Bukkit.getPlayer(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName()));
-            playerMenuUtility.setOpponent(opponent);
-
+            if(opponent != null) {
+                playerMenuUtility.setOpponent(opponent);
+            }
             KitSelectMenu menu = new KitSelectMenu(playerMenuUtility);
             menu.open();
     }

@@ -10,7 +10,6 @@ import org.jetbrains.annotations.NotNull;
 import prod.spooky.kitduels.utils.DuelRequest;
 
 import java.util.Objects;
-import java.util.UUID;
 
 import static prod.spooky.kitduels.commands.DuelCommand.pendingRequests;
 
@@ -19,12 +18,20 @@ public class DeclineCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (commandSender instanceof Player){
-            if(strings.length<1){
+            if(strings.length!=1){
                 commandSender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"Invalid Usage of Command.");
-            }else if (Bukkit.getPlayer(strings[0])== null){
+                return true;
+            }
+            if (Bukkit.getPlayer(strings[0])== null){
                 commandSender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"This Player is Offline.");
-            } else {
-                declineDuelRequest(Objects.requireNonNull(Bukkit.getPlayer(strings[0])));
+                return true;
+            }
+            DuelRequest request = pendingRequests.get(((Player) commandSender).getUniqueId());
+            if (request.getSender() == (Objects.requireNonNull(Bukkit.getPlayer(strings[0])).getUniqueId())){
+                pendingRequests.remove(request.getReceiver());
+                informDeclineDuelRequest(request);
+            }else {
+                commandSender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You don't have any pending duel request from this requestSender to reject.");
             }
         }else {
             System.out.println("This Command must be Executed by Player");
@@ -33,16 +40,15 @@ public class DeclineCommand implements CommandExecutor {
         return true;
     }
 
-    public void declineDuelRequest(Player player) {
-        UUID playerUUID = player.getUniqueId();
-        DuelRequest request = pendingRequests.remove(playerUUID);
+    public void informDeclineDuelRequest(DuelRequest request) {
+        Player requestSender = Bukkit.getPlayer(request.getSender());
+        Player requestReceiver = Bukkit.getPlayer(request.getReceiver());
 
-        if (request != null) {
-            // Handle declining the duel request
-            player.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.LIGHT_PURPLE+"You have declined the duel request from " + Bukkit.getOfflinePlayer(request.getSender()).getName());
-        }else {
-            // no pending request from the player
-            player.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You don't have any pending duel requests to reject.");
+        if (requestSender != null) {
+            requestSender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+Bukkit.getOfflinePlayer(request.getReceiver()).getName()+" has declined your duel request.");
+        }
+        if (requestReceiver != null) {
+            requestReceiver.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You have declined the duel request from " + Bukkit.getOfflinePlayer(request.getSender()).getName());
         }
     }
 

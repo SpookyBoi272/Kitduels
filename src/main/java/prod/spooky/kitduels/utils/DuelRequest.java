@@ -22,16 +22,8 @@ public class DuelRequest {
         return kit;
     }
 
-    public void setKit(String kit) {
-        this.kit = kit;
-    }
-
     public String getMap() {
         return map;
-    }
-
-    public void setMap(String map) {
-        this.map = map;
     }
 
     public UUID getSender() {

@@ -8,6 +8,7 @@ import prod.spooky.kitduels.commands.*;
 import prod.spooky.kitduels.events.OnPlayerJoin;
 import prod.spooky.kitduels.events.OnPlayerDeath;
 import prod.spooky.kitduels.listeners.CompassListener;
+import prod.spooky.kitduels.listeners.DuelEndListener;
 import prod.spooky.kitduels.listeners.MenuListener;
 import prod.spooky.kitduels.menusystem.PlayerMenuUtility;
 
@@ -30,7 +31,7 @@ public final class Kitduels extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new OnPlayerJoin(), this);
         getServer().getPluginManager().registerEvents(new CompassListener(), this);
         getServer().getPluginManager().registerEvents(new OnPlayerDeath(), this);
-        getServer().getPluginManager().registerEvents(new DuelCommand(), this);
+        getServer().getPluginManager().registerEvents(new DuelEndListener(), this);
 
         getServer().getPluginManager().registerEvents(new MenuListener(), this);
     }
