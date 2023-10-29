@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import prod.spooky.kitduels.utils.Duel;
 import prod.spooky.kitduels.utils.DuelRequest;
 
+import java.util.Objects;
 import java.util.UUID;
 
 import static prod.spooky.kitduels.commands.DuelCommand.pendingRequests;
@@ -25,6 +26,10 @@ public class AcceptCommand implements CommandExecutor {
             }else if (Bukkit.getPlayer(strings[0])==null){
                 commandSender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"This Player is Offline.");
             } else{
+                if (Duel.playersInDuel.contains(Objects.requireNonNull(Bukkit.getPlayer(strings[0])).getUniqueId())){
+                    commandSender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You cannot accept requests while in a Duel.");
+                    return true;
+                }
                 acceptDuelRequest((Player) commandSender);
             }
         }else {

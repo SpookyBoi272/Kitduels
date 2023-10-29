@@ -32,7 +32,6 @@ public final class Kitduels extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new CompassListener(), this);
         getServer().getPluginManager().registerEvents(new OnPlayerDeath(), this);
         getServer().getPluginManager().registerEvents(new DuelEndListener(), this);
-
         getServer().getPluginManager().registerEvents(new MenuListener(), this);
     }
 
