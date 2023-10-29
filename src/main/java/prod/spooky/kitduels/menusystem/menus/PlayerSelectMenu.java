@@ -7,9 +7,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import prod.spooky.kitduels.Kitduels;
 import prod.spooky.kitduels.menusystem.Menu;
 import prod.spooky.kitduels.menusystem.PlayerMenuUtility;
+
+import java.util.Objects;
 
 public class PlayerSelectMenu extends Menu {
     public PlayerSelectMenu(PlayerMenuUtility playerMenuUtility) {
@@ -28,7 +29,7 @@ public class PlayerSelectMenu extends Menu {
 
     @Override
     public void handleMenu(InventoryClickEvent e) {
-            Player opponent = Bukkit.getPlayer(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName()));
+            Player opponent = Bukkit.getPlayer(ChatColor.stripColor(Objects.requireNonNull(e.getCurrentItem()).getItemMeta().getDisplayName()));
             if(opponent != null) {
                 playerMenuUtility.setOpponent(opponent);
             }

@@ -6,7 +6,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import prod.spooky.kitduels.Kitduels;
 import prod.spooky.kitduels.menusystem.menus.GameSelectMenu;
-import prod.spooky.kitduels.utils.Hubitems;
 
 public class CompassListener implements Listener {
 

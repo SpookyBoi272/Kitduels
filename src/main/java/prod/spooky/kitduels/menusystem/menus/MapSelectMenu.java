@@ -13,6 +13,7 @@ import prod.spooky.kitduels.menusystem.PlayerMenuUtility;
 import prod.spooky.kitduels.utils.Duel;
 
 import java.util.List;
+import java.util.Objects;
 
 public class MapSelectMenu extends Menu {
     public MapSelectMenu(PlayerMenuUtility playerMenuUtility) {
@@ -31,7 +32,7 @@ public class MapSelectMenu extends Menu {
 
     @Override
     public void handleMenu(InventoryClickEvent e) {
-        String map = ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName());
+        String map = ChatColor.stripColor(Objects.requireNonNull(e.getCurrentItem()).getItemMeta().getDisplayName());
         if (Duel.activeMaps.contains(map)){
             e.getWhoClicked().sendMessage(ChatColor.RED+"This Map is Currently not Available for Duel");
             return;

@@ -9,6 +9,7 @@ import prod.spooky.kitduels.menusystem.Menu;
 import prod.spooky.kitduels.menusystem.PlayerMenuUtility;
 
 import java.util.List;
+import java.util.Objects;
 
 public class GameSelectMenu extends Menu {
     public GameSelectMenu(PlayerMenuUtility playerMenuUtility) {
@@ -28,7 +29,7 @@ public class GameSelectMenu extends Menu {
     @Override
     public void handleMenu(InventoryClickEvent e) {
 
-        if (e.getCurrentItem().getType()==Material.DIAMOND_SWORD){
+        if (Objects.requireNonNull(e.getCurrentItem()).getType()==Material.DIAMOND_SWORD){
             PlayerSelectMenu menu = new PlayerSelectMenu(playerMenuUtility);
             menu.open();
         }

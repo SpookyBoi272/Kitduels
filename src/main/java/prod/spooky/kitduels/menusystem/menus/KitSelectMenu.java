@@ -9,6 +9,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import prod.spooky.kitduels.menusystem.Menu;
 import prod.spooky.kitduels.menusystem.PlayerMenuUtility;
 
+import java.util.Objects;
+
 public class KitSelectMenu extends Menu {
     public KitSelectMenu(PlayerMenuUtility playerMenuUtility) {
         super(playerMenuUtility);
@@ -26,7 +28,7 @@ public class KitSelectMenu extends Menu {
 
     @Override
     public void handleMenu(InventoryClickEvent e) {
-        String kit = ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName());
+        String kit = ChatColor.stripColor(Objects.requireNonNull(e.getCurrentItem()).getItemMeta().getDisplayName());
         playerMenuUtility.setKit(kit);
 
         MapSelectMenu menu = new MapSelectMenu(playerMenuUtility);

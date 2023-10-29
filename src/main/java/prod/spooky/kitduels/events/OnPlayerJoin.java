@@ -11,7 +11,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
-import prod.spooky.kitduels.utils.Hubitems;
+import prod.spooky.kitduels.utils.HubItems;
 
 import java.util.Objects;
 
@@ -38,7 +38,7 @@ public class OnPlayerJoin implements Listener {
     public void setup(Player p){
         p.teleport(Objects.requireNonNull(Bukkit.getWorld("hub")).getSpawnLocation());
         p.getInventory().clear();
-        Hubitems item = new Hubitems();
+        HubItems item = new HubItems();
         item.addItems(p);
         p.setInvulnerable(true);
         p.sendTitle(ChatColor.AQUA + "Kit Duels", ChatColor.WHITE + "Welcome to the server", 1, 100, 20);
