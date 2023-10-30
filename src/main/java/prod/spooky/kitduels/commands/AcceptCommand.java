@@ -26,11 +26,18 @@ public class AcceptCommand implements CommandExecutor {
             }else if (Bukkit.getPlayer(strings[0])==null){
                 commandSender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"This Player is Offline.");
             } else{
-                if (Duel.playersInDuel.contains(Objects.requireNonNull(Bukkit.getPlayer(strings[0])).getUniqueId())){
+                if (Duel.playersInDuel.contains(((Player) commandSender).getUniqueId())){
                     commandSender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You cannot accept requests while in a Duel.");
                     return true;
                 }
-                acceptDuelRequest((Player) commandSender);
+                UUID senderID = ((Player) commandSender).getUniqueId();
+                DuelRequest request = pendingRequests.get(senderID);
+                if (request.getSender() == (Objects.requireNonNull(Bukkit.getPlayer(strings[0])).getUniqueId())){
+                    pendingRequests.remove(senderID);
+                    acceptDuelRequest(request);
+                }else {
+                    commandSender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You don't have any pending duel request from this Player.");
+                }
             }
         }else {
             System.out.println("This Command must be Executed by Player");
@@ -38,25 +45,18 @@ public class AcceptCommand implements CommandExecutor {
         return true;
     }
 
-    // When accepting a duel request
-    public void acceptDuelRequest(Player acceptingplayer) {
-        UUID playerUUID = acceptingplayer.getUniqueId();
-        DuelRequest request = pendingRequests.remove(playerUUID);
+    // Accept the Duel request
+    public void acceptDuelRequest(DuelRequest request) {
+        Player acceptingPlayer = Bukkit.getPlayer(request.getReceiver());
+        Player sendingPlayer = Bukkit.getPlayer(request.getReceiver());
 
-        if (request != null) {
-            UUID senderUUID = request.getSender();
-            if (senderUUID.equals(playerUUID)) {
-                // The player is accepting their own request, handle it accordingly
-                acceptingplayer.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You can't accept your own duel request.");
-            } else {
-                // Handle accepting the duel request (start the duel)
-                Duel duel = new Duel();
-                acceptingplayer.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.GREEN+"You have accepted the duel request from " + Bukkit.getOfflinePlayer(senderUUID).getName());
-                duel.startDuel(acceptingplayer,Bukkit.getPlayer(request.getSender()),request.getKit(),request.getMap());
-            }
+        if (sendingPlayer != null) {
+            acceptingPlayer.sendMessage(ChatColor.RED + "[KitDuels] " + ChatColor.GREEN + "You have accepted the duel request from " + sendingPlayer.getName());
+
+            Duel duel = new Duel();
+            duel.startDuel(acceptingPlayer, Bukkit.getPlayer(request.getSender()), request.getKit(), request.getMap());
         } else {
-            // No pending request from the player
-            acceptingplayer.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You don't have any pending duel requests to accept.");
+            acceptingPlayer.sendMessage(ChatColor.RED + "[KitDuels] "+ChatColor.WHITE+"Player has left the Game.");
         }
     }
 

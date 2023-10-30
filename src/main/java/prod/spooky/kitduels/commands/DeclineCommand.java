@@ -31,7 +31,7 @@ public class DeclineCommand implements CommandExecutor {
                 pendingRequests.remove(request.getReceiver());
                 informDeclineDuelRequest(request);
             }else {
-                commandSender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You don't have any pending duel request from this requestSender to reject.");
+                commandSender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You don't have any pending duel request from this Player.");
             }
         }else {
             System.out.println("This Command must be Executed by Player");

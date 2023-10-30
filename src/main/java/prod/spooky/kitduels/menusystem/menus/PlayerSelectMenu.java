@@ -9,7 +9,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import prod.spooky.kitduels.menusystem.Menu;
 import prod.spooky.kitduels.menusystem.PlayerMenuUtility;
+import prod.spooky.kitduels.utils.Duel;
 
+import java.util.List;
 import java.util.Objects;
 
 public class PlayerSelectMenu extends Menu {
@@ -31,6 +33,10 @@ public class PlayerSelectMenu extends Menu {
     public void handleMenu(InventoryClickEvent e) {
             Player opponent = Bukkit.getPlayer(ChatColor.stripColor(Objects.requireNonNull(e.getCurrentItem()).getItemMeta().getDisplayName()));
             if(opponent != null) {
+                if (Duel.playersInDuel.contains(opponent.getUniqueId())){
+                    e.getWhoClicked().sendMessage(ChatColor.RED+"This Player is Currently not Available for Duel");
+                    return;
+                }
                 playerMenuUtility.setOpponent(opponent);
             }
             KitSelectMenu menu = new KitSelectMenu(playerMenuUtility);
@@ -52,6 +58,9 @@ public class PlayerSelectMenu extends Menu {
         ItemStack playerHead = new ItemStack(Material.PLAYER_HEAD);
         ItemMeta meta = playerHead.getItemMeta();
         meta.setDisplayName(playerName);
+        if (Duel.playersInDuel.contains(Objects.requireNonNull(Bukkit.getPlayer(playerName)).getUniqueId())){
+            meta.setLore(List.of(new String[]{ChatColor.RED+"Not Available",ChatColor.RED+"Current in a Duel"}));
+        }
         playerHead.setItemMeta(meta);
         return playerHead;
     }

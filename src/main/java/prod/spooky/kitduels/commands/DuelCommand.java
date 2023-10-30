@@ -7,6 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import prod.spooky.kitduels.utils.Duel;
 import prod.spooky.kitduels.utils.DuelRequest;
 
 import java.util.*;
@@ -26,6 +27,9 @@ public class DuelCommand implements CommandExecutor {
             map.add("Museum"); map.add("Arena"); map.add("Highset"); map.add("Fractal");
             if (strings.length==3){
                 if (Bukkit.getPlayer(strings[0])!=null && !Objects.equals(p,Bukkit.getPlayer(strings[0])) && kit.contains(strings[1]) && map.contains(strings[2])){
+                    if(Duel.playersInDuel.contains(Objects.requireNonNull(Bukkit.getPlayer(strings[0])).getUniqueId())){
+                        commandSender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You cannot send Duel request while in a Duel.");
+                    }
                     sendDuelRequest(p, Objects.requireNonNull(Bukkit.getPlayer(strings[0])),strings[1], strings[2]);
                 }
             }else {
