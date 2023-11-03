@@ -32,6 +32,9 @@ public class MapSelectMenu extends Menu {
 
     @Override
     public void handleMenu(InventoryClickEvent e) {
+        if(e.getCurrentItem().equals(new ItemStack(Material.GRAY_STAINED_GLASS_PANE))){
+            return;
+        }
         String map = ChatColor.stripColor(Objects.requireNonNull(e.getCurrentItem()).getItemMeta().getDisplayName());
         if (Duel.activeMaps.contains(map)){
             e.getWhoClicked().sendMessage(ChatColor.RED+"This Map is Currently not Available for Duel");

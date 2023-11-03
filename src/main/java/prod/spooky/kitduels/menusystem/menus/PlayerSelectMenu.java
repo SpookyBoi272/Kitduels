@@ -33,14 +33,14 @@ public class PlayerSelectMenu extends Menu {
     public void handleMenu(InventoryClickEvent e) {
             Player opponent = Bukkit.getPlayer(ChatColor.stripColor(Objects.requireNonNull(e.getCurrentItem()).getItemMeta().getDisplayName()));
             if(opponent != null) {
-                if (Duel.playersInDuel.contains(opponent.getUniqueId())){
-                    e.getWhoClicked().sendMessage(ChatColor.RED+"This Player is Currently not Available for Duel");
+                if (Duel.playersInDuel.contains(opponent.getUniqueId())) {
+                    e.getWhoClicked().sendMessage(ChatColor.RED + "This Player is Currently not Available for Duel");
                     return;
                 }
                 playerMenuUtility.setOpponent(opponent);
+                KitSelectMenu menu = new KitSelectMenu(playerMenuUtility);
+                menu.open();
             }
-            KitSelectMenu menu = new KitSelectMenu(playerMenuUtility);
-            menu.open();
     }
 
     public void setMenuItems() {

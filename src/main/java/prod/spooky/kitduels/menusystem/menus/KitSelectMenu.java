@@ -28,6 +28,9 @@ public class KitSelectMenu extends Menu {
 
     @Override
     public void handleMenu(InventoryClickEvent e) {
+        if(e.getCurrentItem().equals(new ItemStack(Material.GRAY_STAINED_GLASS_PANE))){
+            return;
+        }
         String kit = ChatColor.stripColor(Objects.requireNonNull(e.getCurrentItem()).getItemMeta().getDisplayName());
         playerMenuUtility.setKit(kit);
 
