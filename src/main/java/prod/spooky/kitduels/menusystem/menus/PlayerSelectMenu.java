@@ -59,7 +59,7 @@ public class PlayerSelectMenu extends Menu {
         ItemMeta meta = playerHead.getItemMeta();
         meta.setDisplayName(playerName);
         if (Duel.playersInDuel.contains(Objects.requireNonNull(Bukkit.getPlayer(playerName)).getUniqueId())){
-            meta.setLore(List.of(new String[]{ChatColor.RED+"Not Available",ChatColor.RED+"Current in a Duel"}));
+            meta.setLore(List.of(new String[]{ChatColor.RED+"Not Available",ChatColor.RED+"Currently in a Duel"}));
         }
         playerHead.setItemMeta(meta);
         return playerHead;

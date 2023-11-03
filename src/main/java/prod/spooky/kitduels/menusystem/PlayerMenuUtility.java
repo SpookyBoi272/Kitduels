@@ -7,12 +7,11 @@ Companion class to all menus. This is needed to pass information across the enti
  menu system no matter how many inventories are opened or closed.
 
  Each player has one of these objects, and only one.
- */
+*/
 
 public class PlayerMenuUtility {
 
     private final Player owner;
-    //store the player that will be killed so we can access him in the next menu
     private String kit;
     private String map;
     private String opponent;

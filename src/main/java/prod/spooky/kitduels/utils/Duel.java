@@ -17,6 +17,11 @@ public class Duel {
     Kitduels plugin = JavaPlugin.getPlugin(Kitduels.class);
 
     public void startDuel(Player player, Player target, String kit, String map) {
+        if (playersInDuel.contains(player.getUniqueId()) || playersInDuel.contains(target.getUniqueId())){
+            player.sendMessage(ChatColor.RED + "[KitDuels] " + ChatColor.WHITE +"Duel cancelled. Player is Currently Busy." );
+            target.sendMessage(ChatColor.RED + "[KitDuels] " + ChatColor.WHITE +"Duel cancelled. Player is Currently Busy." );
+            return;
+        }
         activeMaps.add(map);
         sendDuelMsg(player, target);
         setupPlayers(player, target, map);
