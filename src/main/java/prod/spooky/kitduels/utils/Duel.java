@@ -22,6 +22,11 @@ public class Duel {
             target.sendMessage(ChatColor.RED + "[KitDuels] " + ChatColor.WHITE +"Duel cancelled. Player is Currently Busy." );
             return;
         }
+        if (activeMaps.contains(map)){
+            player.sendMessage(ChatColor.RED + "[KitDuels] " + ChatColor.WHITE +"Duel Cancelled. Selected Map is Currently Busy.");
+            target.sendMessage(ChatColor.RED + "[KitDuels] " + ChatColor.WHITE +"Duel Cancelled. Selected Map is Currently Busy.");
+        }
+
         activeMaps.add(map);
         sendDuelMsg(player, target);
         setupPlayers(player, target, map);

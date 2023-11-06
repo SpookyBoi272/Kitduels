@@ -19,7 +19,7 @@ public class MenuListener implements Listener {
         // class implements InventoryHolder!!
         if (holder instanceof Menu menu) {
             e.setCancelled(true); //prevent them from fucking with the inventory
-            if (e.getCurrentItem() == null || e.getCurrentItem().equals(new ItemStack(Material.GRAY_STAINED_GLASS_PANE))) {
+            if (e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.GRAY_STAINED_GLASS_PANE)) {
                 //deal with null exceptions
                 return;
             }
