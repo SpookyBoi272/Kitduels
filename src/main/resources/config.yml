@@ -1,0 +1,72 @@
+spawn-locations:
+  Hub:
+    world: "hub"
+    x: 0
+    y: 100
+    z: 0
+    yaw: 90
+    pitch: 0
+
+  Arena1:
+    spawn1:
+      world: "Arena"
+      x: 0
+      y: 68
+      z: 34
+      yaw: 180
+      pitch: 0
+    spawn2:
+      world: "Arena"
+      x: 0
+      y: 68
+      z: -36
+      yaw: 0
+      pitch: 0
+
+  Arena2:
+    spawn1:
+      world: "Fractal"
+      x: 0
+      y: 65
+      z: -38
+      yaw: 0
+      pitch: 0
+    spawn2:
+      world: "Fractal"
+      x: 0
+      y: 65
+      z: 38
+      yaw: 180
+      pitch: 0
+
+  Arena3:
+    spawn1:
+      world: "Museum"
+      x: 0
+      y: 71
+      z: -33
+      yaw: 0
+      pitch: 0
+    spawn2:
+      world: "Museum"
+      x: 0
+      y: 71
+      z: 33
+      yaw: 180
+      pitch: 0
+
+  Arena4:
+    spawn1:
+      world: "Highset"
+      x: 36
+      y: 72
+      z: 0
+      yaw: 90
+      pitch: 0
+    spawn2:
+      world: "Highset"
+      x: -37
+      y: 72
+      z: 0
+      yaw: -90
+      pitch: 0

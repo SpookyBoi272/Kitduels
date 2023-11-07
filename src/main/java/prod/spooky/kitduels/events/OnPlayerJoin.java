@@ -11,6 +11,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
+import prod.spooky.kitduels.utils.ConfigReader;
 import prod.spooky.kitduels.utils.HubItems;
 
 import java.util.Objects;
@@ -36,13 +37,14 @@ public class OnPlayerJoin implements Listener {
     public void onBlockBreak(BlockBreakEvent event){event.setCancelled(true);}
 
     public void setup(Player p){
-        p.teleport(Objects.requireNonNull(Bukkit.getWorld("hub")).getSpawnLocation());
+//        p.teleport(Objects.requireNonNull(Bukkit.getWorld("hub")).getSpawnLocation());
         p.getInventory().clear();
         HubItems item = new HubItems();
         item.addItems(p);
         p.setInvulnerable(true);
         p.sendTitle(ChatColor.AQUA + "Kit Duels", ChatColor.WHITE + "Welcome to the server", 1, 100, 20);
         launchFireworks(p);
+        p.teleport(ConfigReader.getHubSpawn());
     }
 
     private void launchFireworks(Player player) {

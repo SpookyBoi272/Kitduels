@@ -25,6 +25,7 @@ public final class Kitduels extends JavaPlugin {
         registerEvents();
         setCommands();
         loadArenas();
+        this.saveDefaultConfig();
     }
 
     private void registerEvents(){

@@ -64,30 +64,39 @@ public class Duel {
     }
 
     private void setupPlayers(Player player, Player target, String map) {
-        World arena = Objects.requireNonNull(Bukkit.getWorld(map));
+        //World arena = Objects.requireNonNull(Bukkit.getWorld(map));
         switch (map) {
             case "Arena" -> {
-                Location spawnLocation = new Location(arena,0,68,34,180,0);
+//                Location spawnLocation = new Location(arena,0,68,34,180,0);
+                Location spawnLocation = ConfigReader.getArena1PlayerSpawn();
+                System.out.println(spawnLocation.toString());
                 player.teleport(spawnLocation);
-                Location targetLocation = new Location(arena, 0, 68, -36);
+//                Location targetLocation = new Location(arena, 0, 68, -36,0,0);
+                Location targetLocation = ConfigReader.getArena1TargetSpawn();
                 target.teleport(targetLocation);
             }
             case "Fractal" -> {
-                Location spawnLocation = new Location(arena,0,65,-38,0,0);
+//                Location spawnLocation = new Location(arena,0,65,-38,0,0);
+                Location spawnLocation = ConfigReader.getArena2PlayerSpawn();
                 player.teleport(spawnLocation);
-                Location targetLocation = new Location(arena, 0, 65, 38,180,0);
+//                Location targetLocation = new Location(arena, 0, 65, 38,180,0);
+                Location targetLocation = ConfigReader.getArena2TargetSpawn();
                 target.teleport(targetLocation);
             }
             case "Museum" -> {
-                Location spawnLocation = new Location(arena,0,71,-33,0,0);
+//                Location spawnLocation = new Location(arena,0,71,-33,0,0);
+                Location spawnLocation = ConfigReader.getArena3PlayerSpawn();
                 player.teleport(spawnLocation);
-                Location targetLocation = new Location(arena, 0, 71, 33,180,0);
+//                Location targetLocation = new Location(arena, 0, 71, 33,180,0);
+                Location targetLocation = ConfigReader.getArena3TargetSpawn();
                 target.teleport(targetLocation);
             }
             case "Highset" -> {
-                Location spawnLocation = new Location(arena,36,72,0,90,0);
+//                Location spawnLocation = new Location(arena,36,72,0,90,0);
+                Location spawnLocation = ConfigReader.getArena4PlayerSpawn();
                 player.teleport(spawnLocation);
-                Location targetLocation = new Location(arena, -37, 72, 0,-90,0);
+//                Location targetLocation = new Location(arena, -37, 72, 0,-90,0);
+                Location targetLocation = ConfigReader.getArena4TargetSpawn();
                 target.teleport(targetLocation);
             }
         }
