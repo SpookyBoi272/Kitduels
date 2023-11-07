@@ -8,10 +8,13 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import prod.spooky.kitduels.Kitduels;
 import prod.spooky.kitduels.menusystem.Menu;
 import prod.spooky.kitduels.menusystem.PlayerMenuUtility;
+import prod.spooky.kitduels.utils.ConfigReader;
 import prod.spooky.kitduels.utils.Duel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -46,10 +49,11 @@ public class MapSelectMenu extends Menu {
 
     @Override
     public void setMenuItems() {
-        addItemToGUI(inventory, Material.MOSSY_STONE_BRICKS, "Museum", ChatColor.LIGHT_PURPLE);
-        addItemToGUI(inventory, Material.ORANGE_WOOL, "Arena", ChatColor.GOLD);
-        addItemToGUI(inventory, Material.SEA_LANTERN, "Fractal", ChatColor.AQUA);
-        addItemToGUI(inventory, Material.OAK_LEAVES, "Highset", ChatColor.GREEN);
+        ArrayList<String> map = ConfigReader.mapList;
+        addItemToGUI(inventory, Material.MOSSY_STONE_BRICKS, map.get(0), ChatColor.LIGHT_PURPLE);
+        addItemToGUI(inventory, Material.ORANGE_WOOL, map.get(1), ChatColor.GOLD);
+        addItemToGUI(inventory, Material.SEA_LANTERN, map.get(2), ChatColor.AQUA);
+        addItemToGUI(inventory, Material.OAK_LEAVES, map.get(3), ChatColor.GREEN);
         setFillerGlass();
     }
 

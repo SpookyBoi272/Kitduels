@@ -11,7 +11,10 @@ import prod.spooky.kitduels.listeners.CompassListener;
 import prod.spooky.kitduels.listeners.DuelEndListener;
 import prod.spooky.kitduels.listeners.MenuListener;
 import prod.spooky.kitduels.menusystem.PlayerMenuUtility;
+import prod.spooky.kitduels.utils.ConfigReader;
 
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public final class Kitduels extends JavaPlugin {
@@ -22,10 +25,10 @@ public final class Kitduels extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
+        this.saveDefaultConfig();
         registerEvents();
         setCommands();
         loadArenas();
-        this.saveDefaultConfig();
     }
 
     private void registerEvents(){
@@ -46,15 +49,16 @@ public final class Kitduels extends JavaPlugin {
     }
 
     private void loadArenas(){
+        ArrayList<String> mapsList = ConfigReader.getMapsList();
         Bukkit.unloadWorld("hub_nether", false);
         Bukkit.unloadWorld("hub_the_end", false);
-        WorldCreator arenaLoader = new WorldCreator("Arena");
+        WorldCreator arenaLoader = new WorldCreator(mapsList.get(0));
         arenaLoader.createWorld();
-        WorldCreator arenaLoader2 = new WorldCreator("Museum");
+        WorldCreator arenaLoader2 = new WorldCreator(mapsList.get(1));
         arenaLoader2.createWorld();
-        WorldCreator arenaLoader4 = new WorldCreator("Highset");
+        WorldCreator arenaLoader4 = new WorldCreator(mapsList.get(2));
         arenaLoader4.createWorld();
-        WorldCreator arenaLoader5 = new WorldCreator("Fractal");
+        WorldCreator arenaLoader5 = new WorldCreator(mapsList.get(3));
         arenaLoader5.createWorld();
     }
 

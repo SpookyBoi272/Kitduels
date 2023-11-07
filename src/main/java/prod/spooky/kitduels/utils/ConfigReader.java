@@ -4,10 +4,24 @@ import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import prod.spooky.kitduels.Kitduels;
 
+import java.util.ArrayList;
+
 import static org.bukkit.Bukkit.getServer;
 
 public class ConfigReader {
     static Kitduels plugin = Kitduels.getPlugin();
+
+    public static ArrayList<String> mapList = new ArrayList<>();
+
+    public static ArrayList<String> getMapsList(){
+        FileConfiguration config = plugin.getConfig();
+        mapList.add(config.getString("spawn-locations.Arena1.spawn1.world"));
+        System.out.println(config.getString("spawn-locations.Arena1.spawn1.world"));
+        mapList.add(config.getString("spawn-locations.Arena2.spawn1.world"));
+        mapList.add(config.getString("spawn-locations.Arena3.spawn1.world"));
+        mapList.add(config.getString("spawn-locations.Arena4.spawn1.world"));
+        return mapList;
+    }
 
     public static Location getHubSpawn(){
         return loadLocationFromConfig("spawn-locations.Hub");

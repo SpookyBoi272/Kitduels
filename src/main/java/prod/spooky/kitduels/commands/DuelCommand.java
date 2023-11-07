@@ -7,6 +7,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import prod.spooky.kitduels.Kitduels;
+import prod.spooky.kitduels.utils.ConfigReader;
 import prod.spooky.kitduels.utils.Duel;
 import prod.spooky.kitduels.utils.DuelRequest;
 
@@ -16,17 +18,14 @@ import java.util.*;
 public class DuelCommand implements CommandExecutor {
     public static Map<UUID, DuelRequest> pendingRequests = new HashMap<>();
     public static ArrayList<String> kit = new ArrayList<>();
-    public static ArrayList<String> map = new ArrayList<>();
-
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
 
         if (commandSender instanceof Player p){
             kit.add("Shield"); kit.add("Buff"); kit.add("Sword");
-            map.add("Museum"); map.add("Arena"); map.add("Highset"); map.add("Fractal");
             if (strings.length==3){
-                if (Bukkit.getPlayer(strings[0])!=null && !Objects.equals(p,Bukkit.getPlayer(strings[0])) && kit.contains(strings[1]) && map.contains(strings[2])){
+                if (Bukkit.getPlayer(strings[0])!=null && !Objects.equals(p,Bukkit.getPlayer(strings[0])) && kit.contains(strings[1]) && ConfigReader.mapList.contains(strings[2])){
                     if(Duel.playersInDuel.contains(Objects.requireNonNull(Bukkit.getPlayer(strings[0])).getUniqueId())){
                         commandSender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"You cannot send Duel request while in a Duel.");
                     }
