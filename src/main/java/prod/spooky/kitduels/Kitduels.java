@@ -46,6 +46,8 @@ public final class Kitduels extends JavaPlugin {
         getCommand("accept").setExecutor(new AcceptCommand());
         getCommand("decline").setExecutor(new DeclineCommand());
         getCommand("goto").setExecutor(new GotoCommand());
+        getCommand("setDuelSpawn").setExecutor(new SetDuelSpawnCommand());
+        getCommand("setDuelSpawn").setTabCompleter(new SetDuelTabList());
     }
 
     private void loadArenas(){

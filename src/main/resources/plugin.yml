@@ -20,3 +20,6 @@ commands:
     usage: /<command> <player>
   goto:
     description: "Go anywhere"
+  setDuelSpawn:
+    description: "Allows you to edit the spawn location of Duel maps to your current location."
+    usage: /<command> <ArenaNumber> <Spawnside>  - /setDuelSpawn Arena1 spawn1
