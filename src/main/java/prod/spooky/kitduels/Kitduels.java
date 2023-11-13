@@ -13,6 +13,7 @@ import prod.spooky.kitduels.listeners.MenuListener;
 import prod.spooky.kitduels.menusystem.PlayerMenuUtility;
 import prod.spooky.kitduels.utils.ConfigReader;
 
+import java.io.File;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
