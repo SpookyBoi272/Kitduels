@@ -5,8 +5,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import prod.spooky.kitduels.Kitduels;
 import prod.spooky.kitduels.utils.ConfigReader;
 import prod.spooky.kitduels.utils.Duel;
@@ -15,15 +17,18 @@ import prod.spooky.kitduels.utils.DuelRequest;
 import java.util.*;
 
 
-public class DuelCommand implements CommandExecutor {
+public class DuelCommand implements CommandExecutor, TabCompleter {
     public static Map<UUID, DuelRequest> pendingRequests = new HashMap<>();
     public static ArrayList<String> kit = new ArrayList<>();
+
+    public DuelCommand(){
+        kit.add("Shield"); kit.add("Buff"); kit.add("Sword");
+    }
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
 
         if (commandSender instanceof Player p){
-            kit.add("Shield"); kit.add("Buff"); kit.add("Sword");
             if (strings.length==3){
                 if (Bukkit.getPlayer(strings[0])!=null && !Objects.equals(p,Bukkit.getPlayer(strings[0])) && kit.contains(strings[1]) && ConfigReader.mapList.contains(strings[2])){
                     if(Duel.playersInDuel.contains(Objects.requireNonNull(Bukkit.getPlayer(strings[0])).getUniqueId())){
@@ -53,6 +58,20 @@ public class DuelCommand implements CommandExecutor {
         receiver.sendMessage(ChatColor.DARK_PURPLE+"Kit: "+kit+ChatColor.AQUA+"   Map: "+map);
         receiver.sendMessage("Type "+ChatColor.GREEN+"/accept"+ChatColor.WHITE+" or "+ChatColor.RED+"/decline "+ChatColor.WHITE+"to respond.");
         sender.sendMessage(ChatColor.RED+"[KitDuels] "+ChatColor.WHITE+"Sent Duel request to "+receiver.getName());
+    }
+
+    @Override
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+
+        if(strings.length==2) {
+            kit.add("Shield"); kit.add("Buff"); kit.add("Sword");
+            return kit;
+        } else if (strings.length==3){
+            return ConfigReader.mapList;
+        } else if (strings.length==4) {
+            return null;
+        }
+        return null;
     }
 
 }

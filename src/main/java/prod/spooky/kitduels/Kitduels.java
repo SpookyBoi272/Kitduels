@@ -13,8 +13,6 @@ import prod.spooky.kitduels.listeners.MenuListener;
 import prod.spooky.kitduels.menusystem.PlayerMenuUtility;
 import prod.spooky.kitduels.utils.ConfigReader;
 
-import java.io.File;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -42,7 +40,7 @@ public final class Kitduels extends JavaPlugin {
 
     private void setCommands(){
         getCommand("Duel").setExecutor(new DuelCommand());
-        getCommand("Duel").setTabCompleter(new DuelTabList());
+        getCommand("Duel").setTabCompleter(new DuelCommand());
         getCommand("Hub").setExecutor(new HubCommand());
         getCommand("accept").setExecutor(new AcceptCommand());
         getCommand("decline").setExecutor(new DeclineCommand());
