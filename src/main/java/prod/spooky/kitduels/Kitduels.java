@@ -53,14 +53,7 @@ public final class Kitduels extends JavaPlugin {
         ArrayList<String> mapsList = ConfigReader.getMapsList();
         Bukkit.unloadWorld("hub_nether", false);
         Bukkit.unloadWorld("hub_the_end", false);
-//        WorldCreator arenaLoader = new WorldCreator(mapsList.get(0));
-//        arenaLoader.createWorld();
-//        WorldCreator arenaLoader2 = new WorldCreator(mapsList.get(1));
-//        arenaLoader2.createWorld();
-//        WorldCreator arenaLoader4 = new WorldCreator(mapsList.get(2));
-//        arenaLoader4.createWorld();
-//        WorldCreator arenaLoader5 = new WorldCreator(mapsList.get(3));
-//        arenaLoader5.createWorld();
+
     }
 
     //Provide a player and return a menu system for that player
