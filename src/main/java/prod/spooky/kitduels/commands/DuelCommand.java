@@ -9,7 +9,6 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import prod.spooky.kitduels.Kitduels;
 import prod.spooky.kitduels.utils.ConfigReader;
 import prod.spooky.kitduels.utils.Duel;
 import prod.spooky.kitduels.utils.DuelRequest;
