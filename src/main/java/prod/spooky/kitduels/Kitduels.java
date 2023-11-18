@@ -1,7 +1,6 @@
 package prod.spooky.kitduels;
 
 import org.bukkit.Bukkit;
-import org.bukkit.WorldCreator;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import prod.spooky.kitduels.commands.*;
@@ -11,9 +10,7 @@ import prod.spooky.kitduels.listeners.CompassListener;
 import prod.spooky.kitduels.listeners.DuelEndListener;
 import prod.spooky.kitduels.listeners.MenuListener;
 import prod.spooky.kitduels.menusystem.PlayerMenuUtility;
-import prod.spooky.kitduels.utils.ConfigReader;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public final class Kitduels extends JavaPlugin {
@@ -50,7 +47,6 @@ public final class Kitduels extends JavaPlugin {
     }
 
     private void loadArenas(){
-        ArrayList<String> mapsList = ConfigReader.getMapsList();
         Bukkit.unloadWorld("hub_nether", false);
         Bukkit.unloadWorld("hub_the_end", false);
 
